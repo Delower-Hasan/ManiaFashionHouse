@@ -30,7 +30,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                
+
                     @if (session('success'))
 
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -53,8 +53,9 @@
 
                 <div style="margin-top:20px"><a href="{{route('cart.index')}}">view Cart</a></div>
                 <div><a href="{{route('wishlist.index')}}">view wishlist</a></div>
-               
+
             </div>
         </div>
+
     </body>
 </html>

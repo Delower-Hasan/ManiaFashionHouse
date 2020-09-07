@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Backend\Brand;
 use App\Model\Backend\Catagory;
 use App\Model\Backend\Product;
 use App\Model\Backend\Subcatagory;
@@ -13,21 +14,25 @@ use Carbon;
 class ProductController extends Controller
 {
     function index(){
-        
+
         $products = Product::all();
         return view('Backend/product_management/product/products',compact('products'));
     }
 
     function create(){
+
         $subcatagories = Subcatagory::all();
         $catagories = Catagory::all();
-        return view('Backend.product_management.product.product_create',compact('subcatagories','catagories'));
+        $brands = Brand::all();
+        return view('Backend.product_management.product.product_create',compact('subcatagories','catagories','brands'));
     }
     function store(Request $request){
         $request->validate([
             'product_img'=>['required'],
             'catagory_id'=>['required'],
             'subcatagory_id'=>['required'],
+            'brand_id'=>['required'],
+            'status'=>['required'],
             'sku_id'=>['required','integer'],
             'product_name'=>['required'],
             'quantity'=>['required','integer'],
@@ -38,8 +43,9 @@ class ProductController extends Controller
             'color'=>['required'],
             'size'=>['required'],
             'material'=>['required'],
-           
+
             ]);
+
 
         // product
 
@@ -55,6 +61,7 @@ class ProductController extends Controller
                     'product_img'=>json_encode($imgArry),
                     'catagory_id'=>$request->catagory_id,
                     'subcatagory_id'=>$request->subcatagory_id,
+                    'brand_id'=>$request->brand_id,
                     'sku_id'=>$request->sku_id,
                     'product_name'=>$request->product_name,
                     'quantity'=>$request->quantity,
@@ -65,32 +72,39 @@ class ProductController extends Controller
                     'color'=>$request->color,
                     'size'=>$request->size,
                     'material'=>$request->material,
-                   
-                    
+                    'status'=>$request->status,
                 ]);
-             
+
             }
-    
+
         return redirect(route('product.index'))->with('success','Successfully product Added');
 
     }
+    function active($id){
+        Product::where('id',$id)->update([
+            'status'=>1,
+            ]);
+            return back()->with('success','Activated');
+    }
+    function deactive($id){
+        Product::where('id',$id)->update([
+            'status'=>0,
+            ]);
+            return back()->with('success','Deactivated');
+    }
 
     function edit($id){
+        $brands = Brand::all();
         $subcatagories = Subcatagory::all();
         $catagories = Catagory::all();
         $product = Product::where('id',$id)->first();
-        return view('Backend/product_management/product/product_edit',compact('subcatagories','catagories','product'));
+        return view('Backend/product_management/product/product_edit',compact('subcatagories','catagories','product','brands'));
     }
     function update(Request $request,$id){
-        $request->validate([
-            'product_img'=>['required'],
-            'catagory_id'=>['required'],
-            'subcatagory_id'=>['required'],
-            'sku_id'=>['integer'],
-            'product_name'=>['required'],
-            'quantity'=>['integer'],
-            'price'=>['integer'],
-            ]);
+        $product =Product::where('id',$id)->first();
+        $productImage =$product->product_img;
+
+
         if($request->hasFile('product_img')){
             $get_image = $request->file('product_img');
             $imgArry = [];
@@ -99,7 +113,11 @@ class ProductController extends Controller
                     Image::make($images)->save(public_path('/backend/img/products/'.$image));
                     array_push($imgArry,"backend/img/products/".$image);
             }
-
+            foreach($productImage as $img){
+                if(file_exists($img)){
+                        unlink($img);
+                    }
+                }
             $product =Product::where('id',$id)->first();
             $productImage =$product->product_img;
             foreach($productImage as $img){
@@ -111,6 +129,7 @@ class ProductController extends Controller
                 'product_img'=>$imgArry,
                 'catagory_id'=>$request->catagory_id,
                 'subcatagory_id'=>$request->subcatagory_id,
+                'brand_id'=>$request->brand_id,
                 'sku_id'=>$request->sku_id,
                 'product_name'=>$request->product_name,
                 'quantity'=>$request->quantity,
@@ -121,12 +140,14 @@ class ProductController extends Controller
                 'color'=>$request->color,
                 'size'=>$request->size,
                 'material'=>$request->material,
+                'status'=>$request->status,
             ]);
         }
         else{
             Product::findOrFail($id)->update([
                 'catagory_id'=>$request->catagory_id,
                 'subcatagory_id'=>$request->subcatagory_id,
+                'brand_id'=>$request->brand_id,
                 'sku_id'=>$request->sku_id,
                 'product_name'=>$request->product_name,
                 'quantity'=>$request->quantity,
@@ -137,7 +158,8 @@ class ProductController extends Controller
                 'color'=>$request->color,
                 'size'=>$request->size,
                 'material'=>$request->material,
-                    ]);
+                'status'=>$request->status,
+                ]);
         }
 
         return redirect(route('product.index'))->with('success','Product Updated successfully');
@@ -146,16 +168,17 @@ class ProductController extends Controller
     function destroy($id){
         $product =Product::where('id',$id)->first();
         $productImage =$product->product_img;
-       
-       
-   
         foreach($productImage as $img){
         if(file_exists($img)){
-                unlink($img);  
+                unlink($img);
             }
         }
         Product::findOrFail($id)->delete();
         return back()->with('delete','Product Deleted successfully');
+    }
+    function subcatagoryAzax($id){
+        $subcat = Subcatagory::where('catagory_id',$id)->get();
+        return response()->json($subcat);
     }
 
 }

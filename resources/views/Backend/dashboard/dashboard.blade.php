@@ -1,25 +1,25 @@
 @extends('Backend.dashboard.master')
 @section('content')
-<!-- Start content -->
-<div class="content">
-    <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box">
-                    <h4 class="page-title float-left">Dashboard</h4>
 
-                    <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Adminox</a></li>
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Dashboard 1</li>
-                    </ol>
 
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title float-left">Dashboard</h4>
+
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+
+            </ol>
+
+            <div class="clearfix"></div>
         </div>
-        <!-- end row -->
+    </div>
+</div>
+
 
 
         <div class="row">
@@ -347,9 +347,9 @@
         </div>
         <!--- end row -->
 
-    </div> <!-- container -->
 
-</div> <!-- content -->
+
+
 @endsection
 
 
@@ -360,15 +360,3 @@
 
 
 
-
-{{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="{{ route('logout') }}"
-       onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-        {{ __('Logout') }}
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</div> --}}

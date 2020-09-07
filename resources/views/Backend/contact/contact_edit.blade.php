@@ -1,4 +1,6 @@
-<h1>Contact form page</h1>
+
+<h1>Contact edit form page</h1>
+
 <form action="{{ route('contact.update',$contact->id) }}" method="POST">
     @csrf
     <div style="margin-bottom: 10px">
@@ -20,8 +22,5 @@
         <input type="text" value="{{ $contact->hours }}" name="hours" placeholder="Enter hours">
     </div>
     <button type="submit">Submit</button>
-   
-
-
 
 </form>

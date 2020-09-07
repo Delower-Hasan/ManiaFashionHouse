@@ -34,7 +34,9 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/login', 'LoginController@login')->name('admin.login');
     Route::get('/register', 'RegisterController@showRegistrationForm')->name('admin.register');
     Route::post('/register', 'RegisterController@register')->name('admin.register');
-    Route::get('/forget-password', 'ForgotPasswordController@showLinkRequestForm')->name('admin.forget-password');
+    Route::get('/forget-password', 'ForgotPasswordController@forgetPage')->name('admin.forget-password');
+    Route::post('/forget-password-email', 'ForgotPasswordController@SendLinksToEmail')->name('admin.forget-password.email');
+    Route::get('/password-reset', 'ResetPasswordController@showResetForm')->name('admin.password.request');
     });
     Route::get('/dashboard', 'Backend\AdminController@index')->name('admin.dashboard');
     });
@@ -43,7 +45,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group(['namespace' => 'Backend','prefix'=>'catagory'], function () {
     Route::get('/','CatagoryController@index')->name('catagory.index');
-    Route::get('/create','CatagoryController@create')->name('catagory.create');
     Route::post('/post','CatagoryController@post')->name('catagory.post');
     Route::get('/edit/{id}','CatagoryController@edit')->name('catagory.edit');
     Route::post('/update/{id}','CatagoryController@update')->name('catagory.update');
@@ -54,9 +55,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // *****subcatagory Start*******
     Route::group(['namespace' => 'Backend','prefix'=>'subcatagory'], function () {
     Route::get('/','SubcatagoryController@index')->name('subcatagory.index');
-    Route::get('/create','SubcatagoryController@create')->name('subcatagory.create');
     Route::post('/store','SubcatagoryController@store')->name('subcatagory.store');
-    Route::get('/edit/{id}','SubcatagoryController@edit')->name('subcatagory.edit');
     Route::post('/update/{id}','SubcatagoryController@update')->name('subcatagory.update');
     Route::get('/delete/{id}','SubcatagoryController@destroy')->name('subcatagory.delete');
     });
@@ -66,12 +65,26 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::group(['namespace' => 'Backend','prefix'=>'product'], function () {
     Route::get('/','ProductController@index')->name('product.index');
     Route::get('/create','ProductController@create')->name('product.create');
+    Route::get('/azax/{id}','ProductController@subcatagoryAzax')->name('sub.azax.get');
     Route::post('/store','ProductController@store')->name('product.store');
     Route::get('/edit/{id}','ProductController@edit')->name('product.edit');
+    Route::get('/active/{id}','ProductController@active')->name('product.active');
+    Route::get('/deactive/{id}','ProductController@deactive')->name('product.deactive');
     Route::post('/update/{id}','ProductController@update')->name('product.update');
     Route::get('/delete/{id}','ProductController@destroy')->name('product.delete');
     });
 // *****products Ends*******
+
+// *****Brand area Start*******
+    Route::group(['namespace' => 'Backend','prefix'=>'brand'], function () {
+    Route::get('/','BrandController@index')->name('brand.index');
+    // Route::get('/create','BrandController@create')->name('brand.create');
+    Route::post('/store','BrandController@store')->name('brand.store');
+    Route::get('/edit/{id}','BrandController@edit')->name('brand.edit');
+    Route::post('/update/{id}','BrandController@update')->name('brand.update');
+    Route::get('/delete/{id}','BrandController@destroy')->name('brand.delete');
+    });
+// *****Brand area Ends*******
 
 // *****Blog Start*******
     Route::group(['namespace' => 'Backend','prefix'=>'blog'], function () {
@@ -85,6 +98,21 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/comment/{id}','BlogController@StoreComment')->name('comment.store');
     });
 // *****Blog Ends*******
+
+// *****Contacts Start*******
+Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
+    Route::get('/','ContactController@index')->name('contact.index');
+    Route::get('/create','ContactController@create')->name('contact.create');
+    Route::post('/store','ContactController@store')->name('contact.store');
+    Route::get('/edit/{id}','ContactController@edit')->name('contact.edit');
+    Route::post('/update/{id}','ContactController@update')->name('contact.update');
+    Route::get('/delete/{id}','ContactController@destroy')->name('contact.delete');
+    Route::post('/message','ContactController@PostMessage')->name('contact.message');
+    });
+// *****Contacts Ends*******
+
+
+// ************************FRONTEND******************
 
 // *****Cart Start*******
     Route::group(['namespace' => 'Frontend','prefix'=>'cart'], function () {
@@ -106,7 +134,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/','CheckoutController@index')->name('checkout.index');
     // Route::get('/create','CheckoutController@create')->name('checkout.create');
     Route::post('/store','CheckoutController@store')->name('checkout.store');
-    // Route::get('/edit/{id}','CheckoutController@edit')->name('checkout.edit');
+    // Route::get('/edit','CheckoutController@edit')->name('checkout.edit');
     Route::post('/update','CheckoutController@update')->name('checkout.update');
     Route::get('/delete/{id}','CheckoutController@destroy')->name('checkout.delete');
 
@@ -134,17 +162,6 @@ Route::group(['namespace' => 'Frontend','prefix'=>'wishlist'], function () {
     });
 // *****Wishlist Ends*******
 
-// *****Contacts Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
-    Route::get('/','ContactController@index')->name('contact.index');
-    Route::get('/create','ContactController@create')->name('contact.create');
-    Route::post('/store','ContactController@store')->name('contact.store');
-    Route::get('/edit/{id}','ContactController@edit')->name('contact.edit');
-    Route::post('/update/{id}','ContactController@update')->name('contact.update');
-    Route::get('/delete/{id}','ContactController@destroy')->name('contact.delete');
-    Route::post('/message','ContactController@PostMessage')->name('contact.message');
-    });
-// *****Contacts Ends*******
 
 // *****About Start*******
 Route::group(['namespace' => 'Backend','prefix'=>'about'], function () {
@@ -169,7 +186,7 @@ Route::group(['namespace' => 'Backend','prefix'=>'faq'], function () {
     });
 // *****FAQ Ends*******
 
-// *****FAQ Start*******
+// *****Subscription Start*******
 Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
     Route::get('/','SubscriptionController@index')->name('subscription.index');
     Route::get('/create','SubscriptionController@create')->name('subscription.create');
@@ -179,4 +196,4 @@ Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
     Route::post('/email-sent/{id}','SubscriptionController@EmailSent')->name('subscription.email.sent');
     Route::get('/email-all-sent','SubscriptionController@EmailSentAllSubscriber')->name('subscription.email.sent.all');
     });
-// *****FAQ Ends*******
+// *****Subscription Ends*******

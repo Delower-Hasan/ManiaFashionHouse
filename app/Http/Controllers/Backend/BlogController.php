@@ -23,6 +23,7 @@ class BlogController extends Controller
     }
 
     function store(Request $request){
+
         if( $request->hasFile('features_img')){
             $get_image = $request->file('features_img'); //orginal image;
                 $image = Str::random(5).".".$get_image->getClientOriginalExtension();
@@ -36,9 +37,9 @@ class BlogController extends Controller
                     'meta_title'=>$request->meta_title,
                     'meta_description'=>$request->meta_description,
                 ]);
-             
+
             }
-    
+
         return redirect(route('blog.index'))->with('success','Successfully Blog Added');
     }
     function edit($id){
@@ -53,11 +54,11 @@ class BlogController extends Controller
 
             $product =Blog::where('id',$id)->first();
             $productImage =$product->features_img;
-    
+
             if(file_exists($productImage)){
                     unlink($productImage);
                 }
-         
+
             Blog::findOrFail($id)->update([
                 'features_img'=>'backend/img/blog/'.$image,
                     'author_name'=>$request->author_name,
@@ -78,16 +79,16 @@ class BlogController extends Controller
                 'meta_description'=>$request->meta_description,
                 ]);
         }
-        return redirect(route('blog.index'))->with('success','Successfully Blog edited');
+        return redirect(route('blog.index'))->with('success','Successfully Blog Updated');
     }
     function destroy($id){
         $blog =Blog::where('id',$id)->first();
         $blog_img =$blog->features_img;
         if(file_exists($blog_img)){
-                unlink($blog_img);  
+                unlink($blog_img);
             }
         Blog::findOrFail($id)->delete();
-        return back()->with('success','Blog Deleted successfully');
+        return back()->with('delete','Blog Deleted successfully');
     }
 
     // Comments

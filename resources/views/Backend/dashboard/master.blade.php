@@ -11,11 +11,15 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{url('/backend')}}/assets/images/favicon.ico">
 
+
+
+
         <!-- C3 charts css -->
-        <link href="../plugins/c3/c3.min.css" rel="stylesheet" type="text/css"  />
+        <link href="{{ url('/backend') }}/plugins/c3/c3.min.css" rel="stylesheet" type="text/css"  />
 
         <!-- App css -->
         <link href="{{url('/backend')}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        @yield('extra_css')
         <link href="{{url('/backend')}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/backend')}}/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/backend')}}/assets/css/style.css" rel="stylesheet" type="text/css" />
@@ -159,28 +163,29 @@
                         <ul class="metismenu" id="side-menu">
                             <li class="menu-title">Navigation</li>
                             <li>
-                                <a href="javascript: void(0);">
+                                <a href="{{ route('admin.dashboard') }}">
                                     <i class="fi-air-play"></i><span class="badge badge-success pull-right">2</span> <span> Dashboard </span>
                                 </a>
-                                <ul class="nav-second-level" aria-expanded=false>
-                                    <li><a href="index.html">Dashboard 1</a></li>
-                                    <li><a href="dashboard-2.html">Dashboard 2</a></li>
-                                </ul>
+
                             </li>
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-target"></i> <span> Admin UI </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-target"></i> <span> Products </span> <span class="menu-arrow"></span></a>
+
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="admin-grid.html">Grid</a></li>
-                                    <li><a href="admin-sweet-alert.html">Sweet Alert</a></li>
-                                    <li><a href="admin-tiles.html">Tiles Box</a></li>
-                                    <li><a href="admin-nestable.html">Nestable List</a></li>
-                                    <li><a href="admin-rangeslider.html">Range Slider</a></li>
-                                    <li><a href="admin-ratings.html">Ratings</a></li>
-                                    <li><a href="admin-filemanager.html">File Manager</a></li>
-                                    <li><a href="admin-lightbox.html">Lightbox</a></li>
-                                    <li><a href="admin-scrollbar.html">Scroll bar</a></li>
-                                    <li><a href="admin-slider.html">Slider</a></li>
-                                    <li><a href="admin-treeview.html">Treeview</a></li>
+                                    <li><a href="{{ route('catagory.index') }}">Catagory</a></li>
+                                    <li><a href="{{ route('subcatagory.index') }}">Subcatagory</a></li>
+                                    <li><a href="{{ route('product.index') }}">Product</a></li>
+                                    <li><a href="{{ route('brand.index') }}">Brand</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-paper-stack"></i><span> Pages </span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('blog.index') }}">Blog Page</a></li>
+                                    <li><a href="{{ route('contact.index') }}">Contact Page</a></li>
+
                                 </ul>
                             </li>
 
@@ -300,21 +305,6 @@
 
                             <li><a href="calendar.html"><i class="fi-clock"></i> <span>Calendar</span> </a></li>
 
-                            <li>
-                                <a href="javascript: void(0);"><i class="fi-paper-stack"></i><span> Pages </span> <span class="menu-arrow"></span></a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="page-starter.html">Starter Page</a></li>
-                                    <li><a href="page-login.html">Login</a></li>
-                                    <li><a href="page-register.html">Register</a></li>
-                                    <li><a href="page-logout.html">Logout</a></li>
-                                    <li><a href="page-recoverpw.html">Recover Password</a></li>
-                                    <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                                    <li><a href="page-confirm-mail.html">Confirm Mail</a></li>
-                                    <li><a href="page-404.html">Error 404</a></li>
-                                    <li><a href="page-404-alt.html">Error 404-alt</a></li>
-                                    <li><a href="page-500.html">Error 500</a></li>
-                                </ul>
-                            </li>
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);"><i class="fi-marquee-plus"></i><span> Extra Pages </span> <span class="menu-arrow"></span></a>
@@ -359,7 +349,11 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="content-page">
-                @yield('content')
+               <div class="container-fluid">
+                    <div class="content">
+                        @yield('content')
+                    </div>
+               </div>
 
                 <footer class="footer text-right">
                     2017 © Adminox. - Coderthemes.com
@@ -387,15 +381,17 @@
         <script src="{{url('/backend')}}/assets/js/jquery.slimscroll.js"></script>
 
         <!-- Counter js  -->
-        <script src="../plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="../plugins/counterup/jquery.counterup.min.js"></script>
+
+
+        <script src="{{ url('/backend') }}/plugins/waypoints/jquery.waypoints.min.js"></script>
+        <script src="{{ url('/backend') }}/plugins/counterup/jquery.counterup.min.js"></script>
 
         <!--C3 Chart-->
-        <script type="text/javascript" src="../plugins/d3/d3.min.js"></script>
-        <script type="text/javascript" src="../plugins/c3/c3.min.js"></script>
+        <script type="text/javascript" src="{{ url('/backend') }}/plugins/d3/d3.min.js"></script>
+        <script type="text/javascript" src="{{ url('/backend') }}/plugins/c3/c3.min.js"></script>
 
         <!--Echart Chart-->
-        <script src="../plugins/echart/echarts-all.js"></script>
+        <script src="{{ url('/backend') }}/plugins/echart/echarts-all.js"></script>
 
         <!-- Dashboard init -->
         <script src="{{url('/backend')}}/assets/pages/jquery.dashboard.js"></script>
@@ -404,5 +400,10 @@
         <script src="{{url('/backend')}}/assets/js/jquery.core.js"></script>
         <script src="{{url('/backend')}}/assets/js/jquery.app.js"></script>
 
+        @yield('extra_js')
+
+
+
+        @yield('main_js')
     </body>
 </html>

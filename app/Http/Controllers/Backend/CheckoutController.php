@@ -60,4 +60,5 @@ class CheckoutController extends Controller
         return back();
 
     }
+
 }

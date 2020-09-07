@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Backend\Catagory;
+use App\Model\Backend\Product;
 use App\Model\Backend\Subcatagory;
 use Illuminate\Http\Request;
 
 class SubcatagoryController extends Controller
 {
     function index(){
-        $subcatagories = Subcatagory::all();
-        return view('Backend.product_management.subCatagory.subcatagory',compact('subcatagories'));
-    }
-    function create(){
         $catagories = Catagory::all();
-        return view('Backend.product_management.subCatagory.subcatagory_create',compact('catagories'));
+
+        $subcatagories = Subcatagory::all();
+        return view('Backend.product_management.subCatagory.subcatagory',compact('subcatagories','catagories'));
     }
+
     function store(Request $request){
         Subcatagory::insert([
             'subcatagory'=>$request->subcatagory,
@@ -25,11 +25,7 @@ class SubcatagoryController extends Controller
         return redirect(route('subcatagory.index'))->with('success','Successfully Subcatagory Added');
     }
 
-    function edit($id){
-        $subcatagory = Subcatagory::where('id',$id)->first();
-        $catagories = Catagory::all();
-        return view('Backend/product_management/subCatagory.subcatagory_edit',compact('subcatagory','catagories'));
-    }
+
     function update(Request $request,$id){
         Subcatagory::findOrFail($id)->update([
             'catagory_id'=>$request->catagory_id,
@@ -40,6 +36,7 @@ class SubcatagoryController extends Controller
 
     function destroy($id){
         Subcatagory::findOrFail($id)->delete();
+        // Product::where('subcatagory_id',$id)->delete();
         return back()->with('delete','Product Deleted successfully');
     }
 

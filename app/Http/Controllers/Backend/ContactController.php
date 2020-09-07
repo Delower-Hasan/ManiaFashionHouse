@@ -27,15 +27,15 @@ class ContactController extends Controller
             'address'=>$request->address,
             'days'=>$request->days,
             'hours'=>$request->hours,
-            
+
         ]);
         return redirect()->route('contact.index')->with('success','Successfully added contact');
 
     }
-    function edit($id){
-        $contact = Contact::where('id',$id)->first();
-        return view('backend/contact/contact_edit',compact('contact'));
-    }
+    // function edit($id){
+    //     $contact = Contact::where('id',$id)->first();
+    //     return view('backend/contact/contact_edit',compact('contact'));
+    // }
     function update($id,Request $request){
         Contact::findOrFail($id)->update([
             'phone'=>$request->phone,
@@ -49,7 +49,7 @@ class ContactController extends Controller
     }
     function destroy($id){
         Contact::findOrFail($id)->delete();
-        return back()->with('success','Successfully Deleted contact');
+        return back()->with('delete','Successfully Deleted contact');
     }
     function PostMessage(Request $request){
         Contact_message::insert([
