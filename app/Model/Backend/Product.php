@@ -24,7 +24,10 @@ class Product extends Model
         'color',
         'size',
         'material',
-        'status'
+        'status',
+        'meta_title',
+        'slug',
+        'meta_description'
 
     ];
     public function catagory()

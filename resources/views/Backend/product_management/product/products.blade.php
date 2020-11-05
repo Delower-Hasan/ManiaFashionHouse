@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Catagory</h4>
+            <h4 class="page-title float-left">Product</h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -68,6 +68,9 @@
                     <th>color</th>
                     <th>size</th>
                     <th>material</th>
+                    <th>Meta Title</th>
+                    <th>Slug</th>
+                    <th>Meta Description</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th>Action</th>
@@ -97,6 +100,9 @@
                         <td>{{ $product->color }}</td>
                         <td>{{ $product->size }}</td>
                         <td>{{ $product->material }}</td>
+                        <td>{{ $product->meta_title }}</td>
+                        <td>{{ $product->slug }}</td>
+                        <td>{{ $product->meta_description }}</td>
                         <td>
                            @if ($product->status==1)
                            <a href="{{ route('product.deactive',$product->id) }}" class="btn btn-info">Active</a>
@@ -104,6 +110,7 @@
                            <a href="{{ route('product.active',$product->id) }}" class="btn btn-inverse">Deactive</a>
                            @endif
                         </td>
+
                         <td><a class="btn btn-info" href="{{ route('product.edit',$product->id) }}">Edit</a></td>
                         <td><a class="btn btn-danger" href="{{ route('product.delete',$product->id) }}">delete</a></td>
                     </tr>

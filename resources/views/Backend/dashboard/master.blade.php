@@ -183,52 +183,36 @@
                             <li>
                                 <a href="javascript: void(0);"><i class="fi-paper-stack"></i><span> Pages </span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{ route('blog.index') }}">Blog Page</a></li>
-                                    <li><a href="{{ route('contact.index') }}">Contact Page</a></li>
+                                    <li><a href="{{ route('blog.index') }}">Blog </a></li>
+                                    <li><a href="{{ route('contact.index') }}">Contact </a></li>
+                                    <li><a href="{{ route('about.index') }}">About </a></li>
+                                    <li><a href="{{ route('faq.index') }}">FAQ</a></li>
 
                                 </ul>
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span> UI Kit </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Users </span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="ui-typography.html">Typography</a></li>
-                                    <li><a href="ui-panels.html">Panels</a></li>
-                                    <li><a href="ui-buttons.html">Buttons</a></li>
-                                    <li><a href="ui-modals.html">Modals</a></li>
-                                    <li><a href="ui-checkbox-radio.html">Checkboxs-Radios</a></li>
-                                    <li><a href="ui-spinners.html">Spinners</a></li>
-                                    <li><a href="ui-ribbons.html">Ribbons</a></li>
-                                    <li><a href="ui-portlets.html">Portlets</a></li>
-                                    <li><a href="ui-tabs.html">Tabs</a></li>
-                                    <li><a href="ui-progressbars.html">Progress Bars</a></li>
-                                    <li><a href="ui-notifications.html">Notification</a></li>
-                                    <li><a href="ui-carousel.html">Carousel</a>
-                                    <li><a href="ui-video.html">Video</a>
-                                    <li><a href="ui-tooltips-popovers.html">Tooltips & Popovers</a></li>
-                                    <li><a href="ui-images.html">Images</a></li>
-                                    <li><a href="ui-bootstrap.html">Bootstrap UI</a></li>
+                                    <li><a href="{{ route('subscription.index') }}">Subscribers</a></li>
+                                    <li><a href="{{ route('users') }}">Users</a></li>
+                                    <li><a href="{{ route('all.admins') }}">Admin</a></li>
+
                                 </ul>
                             </li>
 
+
+
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Sales </span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('order.index') }}">Orders</a></li>
+                                    <li><a href="icons-materialdesign.html"> Transaction</a></li>
+
+                                </ul>
+                            </li>
                             <li>
                                 <a href="tickets.html"><i class="fi-help"></i><span class="badge badge-danger pull-right">New</span> <span> Tickets </span></a>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Icons </span> <span class="menu-arrow"></span></a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="icons-colored.html">Colored Icons</a></li>
-                                    <li><a href="icons-materialdesign.html">Material Design</a></li>
-                                    <li><a href="icons-dripicons.html">Dripicons</a></li>
-                                    <li><a href="icons-fontawesome.html">Font awesome</a></li>
-                                    <li><a href="icons-feather.html">Feather Icons</a></li>
-                                    <li><a href="icons-simple-line.html">Simple line Icons</a></li>
-                                    <li><a href="icons-flags.html">Flag Icons</a></li>
-                                    <li><a href="icons-file.html">File Icons</a></li>
-                                    <li><a href="icons-pe7.html">PE7 Icons</a></li>
-                                    <li><a href="icons-typicons.html">Typicons</a></li>
-                                </ul>
                             </li>
 
                             <li>

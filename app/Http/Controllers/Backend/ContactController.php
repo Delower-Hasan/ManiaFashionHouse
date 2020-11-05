@@ -32,10 +32,7 @@ class ContactController extends Controller
         return redirect()->route('contact.index')->with('success','Successfully added contact');
 
     }
-    // function edit($id){
-    //     $contact = Contact::where('id',$id)->first();
-    //     return view('backend/contact/contact_edit',compact('contact'));
-    // }
+  
     function update($id,Request $request){
         Contact::findOrFail($id)->update([
             'phone'=>$request->phone,

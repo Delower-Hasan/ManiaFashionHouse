@@ -43,6 +43,7 @@ class CartController extends Controller
          }
          $grandTotal = $total-$total*$discount/100;
          $TotalValue = session('grandTotal', $grandTotal);
+        //  session(['ddd' => $grandTotal]);
          return view('Frontend.cart',compact('carts','discount','total','grandTotal'));
       }
 

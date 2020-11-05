@@ -30,6 +30,9 @@ class CreateProductsTable extends Migration
             $table->string('size');
             $table->string('material');
             $table->string('status')->default(0);
+            $table->string('meta_title');
+            $table->string('slug');
+            $table->text('meta_description');
             $table->timestamps();
         });
     }

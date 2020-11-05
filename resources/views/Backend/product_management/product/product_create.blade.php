@@ -35,88 +35,90 @@
             <h4 class="header-title m-t-0">Add Product</h4>
 
 
-            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="default-wizard" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <fieldset title="1">
+                    <legend>Basic Information</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="catagory_id">Catagory</label>
+                                    <select name="catagory_id" class="form-control" id="catagory_id">
+                                        <option >Select Catagory</option>
+                                        @foreach ($catagories as $catagory)
+                                        <option value="{{ $catagory->id }}">{{ $catagory->catagory_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                <div class="form-group">
-                    <label for="catagory_id">Catagory</label>
-                        <select name="catagory_id" class="form-control" id="catagory_id">
-                            <option >Select Catagory</option>
-                            @foreach ($catagories as $catagory)
-                            <option value="{{ $catagory->id }}">{{ $catagory->catagory_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subcatagory_id">Subcatagory</label>
-                            <select name="subcatagory_id" class="form-control" id="subcatagory_id">
-                                <option >Select subcatagory</option>
-                                @foreach ($subcatagories as $subcat)
-                                <option value="{{ $subcat->id }}">{{ $subcat->subcatagory }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand_id">Brand</label>
-                                <select name="brand_id" class="form-control" id="brand_id">
-                                    <option >Select Brand</option>
-                                    @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="card-box">
-                                <h4 class="header-title m-t-0">Upload Image</h4>
-
-
-                                <div class="p-20 p-b-0">
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-12 padding-left-0 padding-right-0">
-                                            <input type="file" name="product_img[]" id="filer_input2"
-                                                   multiple="multiple">
-                                        </div>
+                                <div class="form-group">
+                                    <label for="subcatagory_id">Subcatagory</label>
+                                        <select name="subcatagory_id" class="form-control" id="subcatagory_id">
+                                            <option >Select subcatagory</option>
+                                            @foreach ($subcatagories as $subcat)
+                                            <option value="{{ $subcat->id }}">{{ $subcat->subcatagory }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
-                                </div>
+                                    <div class="form-group">
+                                        <label for="brand_id">Brand</label>
+                                            <select name="brand_id" class="form-control" id="brand_id">
+                                                <option >Select Brand</option>
+                                                @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="card-box">
+                                            <h4 class="header-title m-t-0">Upload Image</h4>
+                                            <div class="p-20 p-b-0">
+                                                <div class="form-group clearfix">
+                                                    <div class="col-sm-12 padding-left-0 padding-right-0">
+                                                        <input type="file" name="product_img[]" id="filer_input2"
+                                                               multiple="multiple">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                            <div class="form-group">
+                                <label for="SKU">SKU NO <span class="text-danger">*</span></label>
+                                <input type="text"  name="sku_id" parsley-trigger="change" required
+                                       placeholder="SKU NO." class="form-control" id="SKU">
                             </div>
 
-                <div class="form-group">
-                    <label for="SKU">SKU NO <span class="text-danger">*</span></label>
-                    <input type="text"  name="sku_id" parsley-trigger="change" required
-                           placeholder="SKU NO." class="form-control" id="SKU">
-                </div>
+                            <div class="form-group">
+                                <label for="product_name">Product Name NO <span class="text-danger">*</span></label>
+                                <input type="text" name="product_name" parsley-trigger="change" required
+                                       placeholder="Product Name" class="form-control" id="product_name">
+                            </div>
 
-                <div class="form-group">
-                    <label for="product_name">Product Name NO <span class="text-danger">*</span></label>
-                    <input type="text" name="product_name" parsley-trigger="change" required
-                           placeholder="Product Name" class="form-control" id="product_name">
-                </div>
 
-                <div class="form-group">
-                    <label for="quantity">quantity NO <span class="text-danger">*</span></label>
-                    <input type="text" name="quantity" parsley-trigger="change" required
-                           placeholder="Product quantity" class="form-control" id="quantity">
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Price  <span class="text-danger">*</span></label>
-                    <input type="text" name="price" parsley-trigger="change" required
-                           placeholder="Product price" class="form-control" id="price">
-                </div>
                             <div class="card-box">
                                 <h4 class="m-b-30 m-t-0 header-title"><b>Product Short Description</b></h4>
                                 <textarea name="short_description" id="description" placeholder="Product Description" cols="30" rows="10" class="form-control summernote"></textarea>
                             </div>
-
+                        </div>
+                        <div class="col-md-6">
                             <div class="card-box">
                                 <h4 class="m-b-30 m-t-0 header-title"><b>Product Long Description</b></h4>
                                 <textarea name="long_description" id="Description" placeholder="Product Description" cols="30" rows="10" class="form-control summernote"></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="quantity">quantity NO <span class="text-danger">*</span></label>
+                                <input type="text" name="quantity" parsley-trigger="change" required
+                                       placeholder="Product quantity" class="form-control" id="quantity">
+                            </div>
 
+                            <div class="form-group">
+                                <label for="price">Price  <span class="text-danger">*</span></label>
+                                <input type="text" name="price" parsley-trigger="change" required
+                                       placeholder="Product price" class="form-control" id="price">
+                            </div>
                             <div class="form-group">
                               <label for="Color"> Color </label>
                               <input type="text"  name="color" id="Color" placeholder="Product Color" class="form-control">
@@ -137,7 +139,7 @@
                             <div class="form-group">
                                 <label for="product type">product type  <span class="text-danger">*</span></label>
                                 <input type="text" name="product_type" parsley-trigger="change" required
-                                       placeholder="Product type" class="form-control" id="product type">
+                                       placeholder="Product_type" class="form-control" id="product type">
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -148,21 +150,30 @@
 
                                     </select>
                                 </div>
+                        </div>
+                    </div>
 
-
-
-
-                <div class="form-group text-right m-b-0">
-                    <button class="btn btn-primary waves-effect waves-light" type="submit">
-                        Submit
-                    </button>
-                    <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                        Cancel
-                    </button>
-                    <a href="{{ route('product.index') }}" class="btn btn-inverse waves-effect waves-light ">BACK</a>
-
-                </div>
-
+                </fieldset>
+                <fieldset title="2">
+                    <legend>SEO</legend>
+                    <div class="form-group">
+                        <label for="MetaTitle">Meta Title  <span class="text-danger">*</span></label>
+                        <input type="text" name="meta_title" parsley-trigger="change" required
+                               placeholder="Meta Title" class="form-control" id="MetaTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="slug">Slug  <span class="text-danger">*</span></label>
+                        <input type="text" name="slug" parsley-trigger="change" required
+                               placeholder="Meta slug" class="form-control" id="slug">
+                    </div>
+                    <div class="form-group">
+                        <label for="Meta_Description">Meta Description  <span class="text-danger">*</span></label>
+                        <textarea name="meta_description" class="form-control" id="Meta_Description" cols="30" rows="10"></textarea>
+                    </div>
+                </fieldset>
+                <button class="btn btn-primary waves-effect waves-light stepy-finish" type="submit">
+                    Submit
+                </button>
             </form>
         </div> <!-- end card-box -->
     </div>
@@ -190,6 +201,12 @@
 
 <!--Summernote js-->
 <script src="{{ url('/backend') }}/plugins/summernote/summernote.min.js"></script>
+{{--  step by step js  --}}
+<!--Form Wizard-->
+<script src="{{ url('/backend') }}/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
+<!--wizard initialization-->
+<script src="{{ url('/backend') }}/assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
+
 @endsection
 
 @section('main_js')
@@ -233,29 +250,16 @@ $('#catagory_id').change(function(){
         $("#subcatagory_id").empty();
     }
    });
+   {{--  slug  --}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+   $('#MetaTitle').keyup(function() {
+    $('#slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g,"-"));
+});
 
     });
-
-
-
-
-
 
 </script>
 
 @endsection
+
 

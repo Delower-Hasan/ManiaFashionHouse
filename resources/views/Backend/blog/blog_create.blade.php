@@ -79,6 +79,7 @@
                                     <label for="title">Title</label>
                                     <input type="text" id="title" class="form-control"  name='title' placeholder='blog Title'>
                                 </div>
+
                              <div class="form-group">
                                     <label for="Description">Description</label>
                                     <textarea id="Description" name='description' class="form-control summernote"  placeholder='blog Description' cols="30" rows="10"></textarea>
@@ -96,6 +97,12 @@
                                     <label for="metaTitle">Meta Title</label>
                                     <input type="text" id="metaTitle" class="form-control" name='meta_title' placeholder='Meta Title'>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="slug">Meta slug</label>
+                                    <input type="text" id="slug" class="form-control" name='slug' placeholder='Meta slug'>
+                                </div>
+
                                <div class="form-group">
                                     <label for="meta_desc">Meta Description</label>
                                     <textarea id="meta_desc" class="form-control"  name='meta_description' placeholder='Meta Description' cols="30" rows="10"></textarea>
@@ -106,17 +113,16 @@
                         </div>
                     </fieldset>
 
-
-
-
-
-
-                    <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
+                    <button class="btn btn-primary waves-effect waves-light stepy-finish" type="submit">
+                        Submit
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
+
 
 @section('extra_js')
 <!-- Jquery filer js -->
@@ -128,23 +134,6 @@
 <script src="{{ url('/backend') }}/assets/pages/jquery.fileuploads.init.js"></script>
 <!--Summernote js-->
 <script src="{{ url('/backend') }}/plugins/summernote/summernote.min.js"></script>
-
-
-{{--  tadg  --}}
-<script src="{{ url('/backend') }}/plugins/switchery/switchery.min.js"></script>
-<script src="{{ url('/backend') }}/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
-<script src="{{ url('/backend') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
-
-{{--  step by step js  --}}
-<!--Form Wizard-->
-<script src="{{ url('/backend') }}/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
-<!--wizard initialization-->
-<script src="{{ url('/backend') }}/assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
-@endsection
-
-
-
-@section('main_js')
 <script>
     jQuery(document).ready(function(){
 
@@ -159,16 +148,32 @@
             airMode: true
         });
 
-
-
     });
 
 
 
 </script>
 
+
+{{--  tadg  --}}
+<script src="{{ url('/backend') }}/plugins/switchery/switchery.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+
+{{--  step by step js  --}}
+<!--Form Wizard-->
+<script src="{{ url('/backend') }}/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
+<!--wizard initialization-->
+<script src="{{ url('/backend') }}/assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
 @endsection
 
+@section('main_js')
+    <script>
+        $('#metaTitle').keyup(function() {
+            $('#slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g,"-"));
+        });
+    </script>
+@endsection
 
 
 

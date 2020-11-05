@@ -13,8 +13,9 @@ class Blog extends Model
         'title',
         'description',
         'meta_title',
+        'slug',
         'meta_description',
-        
-     
+
+
     ];
 }

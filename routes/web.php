@@ -104,12 +104,62 @@ Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
     Route::get('/','ContactController@index')->name('contact.index');
     Route::get('/create','ContactController@create')->name('contact.create');
     Route::post('/store','ContactController@store')->name('contact.store');
-    Route::get('/edit/{id}','ContactController@edit')->name('contact.edit');
     Route::post('/update/{id}','ContactController@update')->name('contact.update');
     Route::get('/delete/{id}','ContactController@destroy')->name('contact.delete');
     Route::post('/message','ContactController@PostMessage')->name('contact.message');
     });
 // *****Contacts Ends*******
+
+// *****About Start*******
+Route::group(['namespace' => 'Backend','prefix'=>'about'], function () {
+    Route::get('/','AboutController@index')->name('about.index');
+    Route::get('/create','AboutController@create')->name('about.create');
+    Route::post('/store','AboutController@store')->name('about.store');
+    Route::post('/update/{id}','AboutController@update')->name('about.update');
+    Route::get('/delete/{id}','AboutController@destroy')->name('about.delete');
+
+    });
+// *****About Ends*******
+
+// *****FAQ Start*******
+Route::group(['namespace' => 'Backend','prefix'=>'faq'], function () {
+    Route::get('/','FaqController@index')->name('faq.index');
+    Route::get('/create','FaqController@create')->name('faq.create');
+    Route::post('/store','FaqController@store')->name('faq.store');
+    Route::get('/edit/{id}','FaqController@edit')->name('faq.edit');
+    Route::post('/update/{id}','FaqController@update')->name('faq.update');
+    Route::get('/delete/{id}','FaqController@destroy')->name('faq.delete');
+    Route::get('/active/{id}','FaqController@active')->name('faq.active');
+    Route::get('/deactive/{id}','FaqController@deactive')->name('faq.deactive');
+    });
+// *****FAQ Ends*******
+
+// *****Subscription Start*******
+Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
+    Route::get('/','SubscriptionController@index')->name('subscription.index');
+    Route::get('/create','SubscriptionController@create')->name('subscription.create');
+    Route::post('/store','SubscriptionController@store')->name('subscription.store');
+    Route::get('/delete/{id}','SubscriptionController@destroy')->name('subscription.delete');
+    Route::get('/email/{id}','SubscriptionController@SendingEmail')->name('sub.email');
+    Route::post('/email-sent/{id}','SubscriptionController@EmailSent')->name('subscription.email.sent');
+    Route::get('/email-all-sent','SubscriptionController@EmailSentAllSubscriber')->name('subscription.email.sent.all');
+    // users
+    Route::get('/users','SubscriptionController@users')->name('users');
+    // Admin
+    Route::get('/admins','SubscriptionController@Admin')->name('all.admins');
+    });
+// *****Subscription Ends*******
+
+// *****Subscription Start*******
+Route::group(['namespace' => 'Backend','prefix'=>'order'], function () {
+    Route::get('/','OrderController@index')->name('order.index');
+    Route::get('/create','OrderController@create')->name('order.create');
+    Route::post('/store','OrderController@store')->name('order.store');
+    Route::get('/delete/{id}','OrderController@destroy')->name('order.delete');
+
+    });
+// *****Subscription Ends*******
+
 
 
 // ************************FRONTEND******************
@@ -137,23 +187,17 @@ Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
     // Route::get('/edit','CheckoutController@edit')->name('checkout.edit');
     Route::post('/update','CheckoutController@update')->name('checkout.update');
     Route::get('/delete/{id}','CheckoutController@destroy')->name('checkout.delete');
+    Route::get('/product/shipped/{id}','CheckoutController@shippedProduct')->name('product.shipped');
 
     });
 // *****Checkout Ends*******
 
 
 
-
-
-
-
-
-
-
-
 // *****Wishlist Start*******
 Route::group(['namespace' => 'Frontend','prefix'=>'wishlist'], function () {
     Route::get('/','WishListController@index')->name('wishlist.index');
+    Route::get('/abijabi','WishListController@abijabi')->name('wishlist.abijabi');
 
     Route::get('/store/{id}','WishListController@store')->name('wishlist.store');
 
@@ -163,37 +207,6 @@ Route::group(['namespace' => 'Frontend','prefix'=>'wishlist'], function () {
 // *****Wishlist Ends*******
 
 
-// *****About Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'about'], function () {
-    Route::get('/','AboutController@index')->name('about.index');
-    Route::get('/create','AboutController@create')->name('about.create');
-    Route::post('/store','AboutController@store')->name('about.store');
-    Route::get('/edit/{id}','AboutController@edit')->name('about.edit');
-    Route::post('/update/{id}','AboutController@update')->name('about.update');
-    Route::get('/delete/{id}','AboutController@destroy')->name('about.delete');
 
-    });
-// *****About Ends*******
 
-// *****FAQ Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'faq'], function () {
-    Route::get('/','FaqController@index')->name('faq.index');
-    Route::get('/create','FaqController@create')->name('faq.create');
-    Route::post('/store','FaqController@store')->name('faq.store');
-    Route::get('/edit/{id}','FaqController@edit')->name('faq.edit');
-    Route::post('/update/{id}','FaqController@update')->name('faq.update');
-    Route::get('/delete/{id}','FaqController@destroy')->name('faq.delete');
-    });
-// *****FAQ Ends*******
 
-// *****Subscription Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
-    Route::get('/','SubscriptionController@index')->name('subscription.index');
-    Route::get('/create','SubscriptionController@create')->name('subscription.create');
-    Route::post('/store','SubscriptionController@store')->name('subscription.store');
-    Route::get('/delete/{id}','SubscriptionController@destroy')->name('subscription.delete');
-    Route::get('/email/{id}','SubscriptionController@SendingEmail')->name('sub.email');
-    Route::post('/email-sent/{id}','SubscriptionController@EmailSent')->name('subscription.email.sent');
-    Route::get('/email-all-sent','SubscriptionController@EmailSentAllSubscriber')->name('subscription.email.sent.all');
-    });
-// *****Subscription Ends*******

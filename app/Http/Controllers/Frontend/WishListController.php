@@ -18,13 +18,13 @@ class WishListController extends Controller
 
 
    function store($id){
-    $MAC = exec('getmac'); 
-    $MAC = strtok($MAC, ' '); 
+    $MAC = exec('getmac');
+    $MAC = strtok($MAC, ' ');
 
     $cart = WishList::where('product_id',$id)->where('mac_address',$MAC)->exists();
-    
-    
-    
+
+
+
     if($cart){
       return back()->with('success','Already exist on wishlist');
     }
@@ -35,18 +35,18 @@ class WishListController extends Controller
        ]);
     }
     return back()->with('success','Listed on wishlist Successfully');
-      
+
    }
 
    function WishToCart($id){
-    $MAC = exec('getmac'); 
-    $MAC = strtok($MAC, ' '); 
+    $MAC = exec('getmac');
+    $MAC = strtok($MAC, ' ');
 
     $cart = Cart::where('product_id',$id)->where('mac_address',$MAC)->exists();
-    
+
     $product = Product::where('id',$id)->first();
     $product_price = $product->price;
-    
+
     if($cart){
        Cart::where('product_id',$id)->where('mac_address',$MAC)->increment('quantity',1);
        Cart::where('product_id',$id)->where('mac_address',$MAC)->increment('totall',$product_price);
@@ -64,9 +64,12 @@ class WishListController extends Controller
     return back()->with('success','product Carted successfully');
    }
    function destroy($id){
-      $MAC = exec('getmac'); 
-      $MAC = strtok($MAC, ' '); 
+      $MAC = exec('getmac');
+      $MAC = strtok($MAC, ' ');
       WishList::where('id',$id)->where('mac_address',$MAC)->delete();
       return back()->with('success','successfully Deleted');
+   }
+   function abijabi(){
+       return view('Frontend.Checkout.invoice');
    }
 }

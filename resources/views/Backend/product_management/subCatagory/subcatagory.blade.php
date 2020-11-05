@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Catagory</h4>
+            <h4 class="page-title float-left">Subcatagory</h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
@@ -67,7 +67,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin;
 use Illuminate\Http\Request;
 use App\Model\Backend\Subscription;
 use App\Model\Backend\SubEmails;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Mail;
+use Carbon\Carbon;
 
 class SubscriptionController extends Controller
 {
@@ -21,7 +24,8 @@ class SubscriptionController extends Controller
     }
     function store(Request $request){
         Subscription::insert([
-            'email'=>$request->email
+            'email'=>$request->email,
+            'created_at'=>Carbon::now()
         ]);
         return redirect()->route('subscription.index')->with('success','Successfully inserted');
     }
@@ -81,6 +85,15 @@ class SubscriptionController extends Controller
         return back()->with('success','Successfully message Sents to all user');
 
 
+    }
+
+    function users(){
+        $users = User::all();
+        return view('Backend.subscription.users',compact('users'));
+    }
+    function Admin(){
+        $admins = Admin::all();
+        return view('Backend.subscription.admins',compact('admins'));
     }
 
 

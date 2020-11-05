@@ -21,6 +21,7 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('meta_title');
+            $table->string('slug');
             $table->text('meta_description');
             $table->timestamps();
         });

@@ -26,11 +26,8 @@ class AboutController extends Controller
         ]);
         return redirect()->route('about.index')->with('success','Successfully Inserted');
     }
-    function edit($id){
-        $about = About::where('id',$id)->first();
-        return view('Backend.about.about_edit',compact('about'));
-    }
-    
+
+
     function update($id,Request $request){
         About::findOrFail($id)->update([
             'about_title'=>$request->about_title,
@@ -43,6 +40,6 @@ class AboutController extends Controller
     }
     function destroy($id){
         About::findOrFail($id)->delete();
-        return back()->with('success','Successfully deleted');
+        return back()->with('delete','Successfully deleted');
     }
 }

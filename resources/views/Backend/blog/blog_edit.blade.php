@@ -98,6 +98,10 @@
                                     <label for="metaTitle">Meta Title</label>
                                     <input type="text" value="{{ $blog->meta_title }}"  id="metaTitle" class="form-control" name='meta_title' placeholder='Meta Title'>
                                 </div>
+                                <div class="form-group">
+                                    <label for="slug">Meta slug</label>
+                                    <input type="text" id="slug" class="form-control" name='slug' placeholder='Meta slug'>
+                                </div>
                                <div class="form-group">
                                     <label for="meta_desc">Meta Description</label>
                                     <textarea id="meta_desc" class="form-control"  name='meta_description' placeholder='Meta Description' cols="30" rows="10">
@@ -165,6 +169,14 @@
 </script>
 
 @endsection
+@section('main_js')
+    <script>
+        $('#metaTitle').keyup(function() {
+            $('#slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g,"-"));
+        });
+    </script>
+@endsection
+
 
 
 

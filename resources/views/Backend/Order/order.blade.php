@@ -15,11 +15,11 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Blog </h4>
+            <h4 class="page-title float-left">Manage Orders </h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('order.index') }}">Orders</a></li>
 
             </ol>
 
@@ -48,54 +48,70 @@
                 </button>
             </div>
             @endif
-            <div class="py-4 pl-3">
-                <a class="btn btn-primary waves-effect w-md waves-light " href="{{ route('blog.create') }}">Add </a>
-            </div>
-
-
 
             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
                 <thead>
+
                 <tr>
-                    <th>blog Image</th>
-                    <th>Blog Title</th>
-                    <th>Blog Description</th>
-                    <th>Author name</th>
-                    <th>Tag</th>
-                    <th>Blog meta title</th>
-                    <th>Slug</th>
-                    <th>Blog meta Description</th>
-                    <th>Comment</th>
-                    <th>Action</th>
-                    <th>Action</th>
+                    <th>Order Id</th>
+                    <th>Product</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
+                    <th>Shipping Status</th>
+                    <th>Order Status</th>
+                    <th>Date</th>
+                    <th>Total</th>
+
 
                 </tr>
                 </thead>
 
 
                 <tbody>
-                    @foreach ($blogs as $blog)
-                    <tr>
-                    <td><img src="{{url($blog->features_img)}}" width="50" alt=""></td>
-                    <td>{{$blog->title}}</td>
-                    <td>{{substr($blog->description,0,30)}}</td>
-                    <td>{{$blog->author_name}}</td>
-                    <td>{{$blog->tag}}</td>
-                    <td>{{$blog->meta_title}}</td>
-                    <td>{{$blog->slug}}</td>
-                    <td>{{$blog->meta_description}}</td>
-                    <td>
-                      @foreach ($comments as $comment)
-                          @if ($blog->id == $comment->blog_id)
-                              {{ $comment->comment }}
-                          @endif
-                      @endforeach
-                    </td>
-                    <td><a class="btn btn-custom waves-effect waves-light btn-sm" href="{{route('blog.edit',$blog->id)}}">Edit</a></td>
-                    <td><a class="btn btn-danger waves-effect waves-light btn-sm" href="{{route('blog.delete',$blog->id)}}">Delete</a></td>
 
+                @foreach ($orders as $keys=> $order)
+                <tr>
+
+                    <td>{{$order->id}}</td>
+                    <td>
+                        {{ $order->product->product_name }}
+                    </td>
+
+                     <td>
+                        @if ($order->billing->transaction_id == 'cash')
+                            Cash
+                        @elseif($order->billing->cash_on_deliver=='on')
+                            Cash On Delivery
+                            @else
+                            Invalid payment
+                        @endif
+                    </td>
+
+                    @if ($order->shipping_process ==1)
+                    <td>
+                        {{ $order->is_paid==1?'Paid':'Due' }}
+                    </td>
+
+                    @else
+                    <td>Processing</td>
+                   @endif
+
+                    <td>{{ $order->shipping_process==0?'Processing':'Shipped' }}</td>
+
+                    @if ($order->shipping_process==0)
+                        <td> Processing</td>
+                        @else
+                        <td>Cancel</td>
+
+                    @endif
+                    {{-- <td>{{ $order->is_cancel==0?'Delivered':'Cancel' }}</td> --}}
+                    <td>{{ $order->created_at->format('M d, Y') }}</td>
+                    <td>{{ $order->billing->grandTotal }}</td>
 
                     </tr>
+
+
                 @endforeach
                 </tbody>
             </table>

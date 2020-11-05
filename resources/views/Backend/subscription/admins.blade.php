@@ -15,11 +15,11 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Blog </h4>
+            <h4 class="page-title float-left">All Admins </h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('all.admins') }}">Admins</a></li>
 
             </ol>
 
@@ -48,55 +48,34 @@
                 </button>
             </div>
             @endif
-            <div class="py-4 pl-3">
-                <a class="btn btn-primary waves-effect w-md waves-light " href="{{ route('blog.create') }}">Add </a>
-            </div>
+
+
 
 
 
             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>blog Image</th>
-                    <th>Blog Title</th>
-                    <th>Blog Description</th>
-                    <th>Author name</th>
-                    <th>Tag</th>
-                    <th>Blog meta title</th>
-                    <th>Slug</th>
-                    <th>Blog meta Description</th>
-                    <th>Comment</th>
-                    <th>Action</th>
-                    <th>Action</th>
+
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
 
                 </tr>
                 </thead>
 
 
                 <tbody>
-                    @foreach ($blogs as $blog)
-                    <tr>
-                    <td><img src="{{url($blog->features_img)}}" width="50" alt=""></td>
-                    <td>{{$blog->title}}</td>
-                    <td>{{substr($blog->description,0,30)}}</td>
-                    <td>{{$blog->author_name}}</td>
-                    <td>{{$blog->tag}}</td>
-                    <td>{{$blog->meta_title}}</td>
-                    <td>{{$blog->slug}}</td>
-                    <td>{{$blog->meta_description}}</td>
-                    <td>
-                      @foreach ($comments as $comment)
-                          @if ($blog->id == $comment->blog_id)
-                              {{ $comment->comment }}
-                          @endif
-                      @endforeach
-                    </td>
-                    <td><a class="btn btn-custom waves-effect waves-light btn-sm" href="{{route('blog.edit',$blog->id)}}">Edit</a></td>
-                    <td><a class="btn btn-danger waves-effect waves-light btn-sm" href="{{route('blog.delete',$blog->id)}}">Delete</a></td>
+                    @foreach ($admins as $admin)
+                        <tr>
+                            <td>{{ $admin->id }}</td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->email }}</td>
 
 
-                    </tr>
-                @endforeach
+                        </tr>
+
+                        @endforeach
                 </tbody>
             </table>
         </div>
@@ -141,6 +120,8 @@
 </script>
 
 @endsection
+
+
 
 
 

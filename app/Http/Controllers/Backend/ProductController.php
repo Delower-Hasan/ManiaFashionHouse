@@ -73,6 +73,9 @@ class ProductController extends Controller
                     'size'=>$request->size,
                     'material'=>$request->material,
                     'status'=>$request->status,
+                    'meta_title'=>$request->meta_title,
+                    'slug'=>$request->slug,
+                    'meta_description'=>$request->meta_description,
                 ]);
 
             }
@@ -141,6 +144,9 @@ class ProductController extends Controller
                 'size'=>$request->size,
                 'material'=>$request->material,
                 'status'=>$request->status,
+                'meta_title'=>$request->meta_title,
+                'slug'=>$request->slug,
+                'meta_description'=>$request->meta_description,
             ]);
         }
         else{
@@ -159,6 +165,9 @@ class ProductController extends Controller
                 'size'=>$request->size,
                 'material'=>$request->material,
                 'status'=>$request->status,
+                'meta_title'=>$request->meta_title,
+                'slug'=>$request->slug,
+                'meta_description'=>$request->meta_description,
                 ]);
         }
 

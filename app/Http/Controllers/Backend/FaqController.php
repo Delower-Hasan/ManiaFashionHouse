@@ -41,4 +41,16 @@ class FaqController extends Controller
         FAQ::findOrFail($id)->delete();
         return back()->with('success','Successfully Deleted FAQ');
     }
+    function active($id){
+        FAQ::where('id',$id)->update([
+            'status'=>1,
+            ]);
+            return back()->with('success','Activated');
+    }
+    function deactive($id){
+        FAQ::where('id',$id)->update([
+            'status'=>0,
+            ]);
+            return back()->with('success','Deactivated');
+    }
 }

@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->string('qty');
+            $table->string('is_paid')->default(false);
+            $table->string('is_cancel')->default(false);
             $table->string('shipping_process')->default(false);
             $table->timestamps();
         });
