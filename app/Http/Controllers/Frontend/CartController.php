@@ -22,9 +22,6 @@ class CartController extends Controller
       $now = Carbon::now();
       $is_coupon = Coupon::where('status',1)->exists();
 
-
-
-
       if($is_coupon && $getCoupon == $coupon_code && $end_date >= $now && $end_date > $start_date  ){
          $discount = $coupon->discount;
          $total = 0;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Model\Backend\Brand;
 use App\Model\Backend\Catagory;
+use App\Model\Backend\ColorSize;
 use App\Model\Backend\Product;
 use App\Model\Backend\Subcatagory;
 use Illuminate\Http\Request;
@@ -14,9 +15,9 @@ use Carbon;
 class ProductController extends Controller
 {
     function index(){
-
+        $colors = ColorSize::all();
         $products = Product::all();
-        return view('Backend/product_management/product/products',compact('products'));
+        return view('Backend/product_management/product/products',compact('products','colors'));
     }
 
     function create(){
@@ -35,15 +36,11 @@ class ProductController extends Controller
             'status'=>['required'],
             'sku_id'=>['required','integer'],
             'product_name'=>['required'],
-            'quantity'=>['required','integer'],
             'price'=>['required','integer'],
             'short_description'=>['required'],
             'product_type'=>['required'],
             'long_description'=>['required'],
-            'color'=>['required'],
-            'size'=>['required'],
             'material'=>['required'],
-
             ]);
 
 
@@ -64,14 +61,12 @@ class ProductController extends Controller
                     'brand_id'=>$request->brand_id,
                     'sku_id'=>$request->sku_id,
                     'product_name'=>$request->product_name,
-                    'quantity'=>$request->quantity,
                     'price'=>$request->price,
                     'short_description'=>$request->short_description,
                     'product_type'=>$request->product_type,
                     'long_description'=>$request->long_description,
-                    'color'=>$request->color,
-                    'size'=>$request->size,
                     'material'=>$request->material,
+                    'is_features'=>$request->is_features,
                     'status'=>$request->status,
                     'meta_title'=>$request->meta_title,
                     'slug'=>$request->slug,
@@ -135,14 +130,12 @@ class ProductController extends Controller
                 'brand_id'=>$request->brand_id,
                 'sku_id'=>$request->sku_id,
                 'product_name'=>$request->product_name,
-                'quantity'=>$request->quantity,
                 'price'=>$request->price,
                 'short_description'=>$request->short_description,
                 'product_type'=>$request->product_type,
                 'long_description'=>$request->long_description,
-                'color'=>$request->color,
-                'size'=>$request->size,
                 'material'=>$request->material,
+                'is_features'=>$request->is_features,
                 'status'=>$request->status,
                 'meta_title'=>$request->meta_title,
                 'slug'=>$request->slug,
@@ -156,14 +149,12 @@ class ProductController extends Controller
                 'brand_id'=>$request->brand_id,
                 'sku_id'=>$request->sku_id,
                 'product_name'=>$request->product_name,
-                'quantity'=>$request->quantity,
                 'price'=>$request->price,
                 'short_description'=>$request->short_description,
                 'product_type'=>$request->product_type,
                 'long_description'=>$request->long_description,
-                'color'=>$request->color,
-                'size'=>$request->size,
                 'material'=>$request->material,
+                'is_features'=>$request->is_features,
                 'status'=>$request->status,
                 'meta_title'=>$request->meta_title,
                 'slug'=>$request->slug,
@@ -183,6 +174,7 @@ class ProductController extends Controller
             }
         }
         Product::findOrFail($id)->delete();
+        ColorSize::where('product_id',$id)->delete();
         return back()->with('delete','Product Deleted successfully');
     }
     function subcatagoryAzax($id){

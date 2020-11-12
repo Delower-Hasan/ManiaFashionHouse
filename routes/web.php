@@ -43,7 +43,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // *****Catagory Start*******
 
-    Route::group(['namespace' => 'Backend','prefix'=>'catagory'], function () {
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/catagory'], function () {
     Route::get('/','CatagoryController@index')->name('catagory.index');
     Route::post('/post','CatagoryController@post')->name('catagory.post');
     Route::get('/edit/{id}','CatagoryController@edit')->name('catagory.edit');
@@ -53,7 +53,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // *****Catagory Ends*******
 
 // *****subcatagory Start*******
-    Route::group(['namespace' => 'Backend','prefix'=>'subcatagory'], function () {
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/subcatagory'], function () {
     Route::get('/','SubcatagoryController@index')->name('subcatagory.index');
     Route::post('/store','SubcatagoryController@store')->name('subcatagory.store');
     Route::post('/update/{id}','SubcatagoryController@update')->name('subcatagory.update');
@@ -62,7 +62,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // *****subcatagory Ends*******
 
 // *****products Start*******
-    Route::group(['namespace' => 'Backend','prefix'=>'product'], function () {
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/product'], function () {
     Route::get('/','ProductController@index')->name('product.index');
     Route::get('/create','ProductController@create')->name('product.create');
     Route::get('/azax/{id}','ProductController@subcatagoryAzax')->name('sub.azax.get');
@@ -75,8 +75,18 @@ Route::get('/home', 'HomeController@index')->name('home');
     });
 // *****products Ends*******
 
+// *****Color & Size Start*******
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/color'], function () {
+    Route::get('/','colorsizeController@index')->name('color.index');
+    Route::get('/create','colorsizeController@create')->name('color.create');
+    Route::post('/store','colorsizeController@store')->name('color.store');
+    Route::post('/update/{id}','colorsizeController@update')->name('color.update');
+    Route::get('/delete/{id}','colorsizeController@destroy')->name('color.delete');
+    });
+// *****Color & Size Ends*******
+
 // *****Brand area Start*******
-    Route::group(['namespace' => 'Backend','prefix'=>'brand'], function () {
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/brand'], function () {
     Route::get('/','BrandController@index')->name('brand.index');
     // Route::get('/create','BrandController@create')->name('brand.create');
     Route::post('/store','BrandController@store')->name('brand.store');
@@ -87,7 +97,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // *****Brand area Ends*******
 
 // *****Blog Start*******
-    Route::group(['namespace' => 'Backend','prefix'=>'blog'], function () {
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/blog'], function () {
     Route::get('/','BlogController@index')->name('blog.index');
     Route::get('/create','BlogController@create')->name('blog.create');
     Route::post('/store','BlogController@store')->name('blog.store');
@@ -100,7 +110,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // *****Blog Ends*******
 
 // *****Contacts Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
+Route::group(['namespace' => 'Backend','prefix'=>'admin/contact'], function () {
     Route::get('/','ContactController@index')->name('contact.index');
     Route::get('/create','ContactController@create')->name('contact.create');
     Route::post('/store','ContactController@store')->name('contact.store');
@@ -111,7 +121,7 @@ Route::group(['namespace' => 'Backend','prefix'=>'contact'], function () {
 // *****Contacts Ends*******
 
 // *****About Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'about'], function () {
+Route::group(['namespace' => 'Backend','prefix'=>'admin/about'], function () {
     Route::get('/','AboutController@index')->name('about.index');
     Route::get('/create','AboutController@create')->name('about.create');
     Route::post('/store','AboutController@store')->name('about.store');
@@ -122,7 +132,7 @@ Route::group(['namespace' => 'Backend','prefix'=>'about'], function () {
 // *****About Ends*******
 
 // *****FAQ Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'faq'], function () {
+Route::group(['namespace' => 'Backend','prefix'=>'admin/faq'], function () {
     Route::get('/','FaqController@index')->name('faq.index');
     Route::get('/create','FaqController@create')->name('faq.create');
     Route::post('/store','FaqController@store')->name('faq.store');
@@ -135,7 +145,7 @@ Route::group(['namespace' => 'Backend','prefix'=>'faq'], function () {
 // *****FAQ Ends*******
 
 // *****Subscription Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
+Route::group(['namespace' => 'Backend','prefix'=>'admin/subscription'], function () {
     Route::get('/','SubscriptionController@index')->name('subscription.index');
     Route::get('/create','SubscriptionController@create')->name('subscription.create');
     Route::post('/store','SubscriptionController@store')->name('subscription.store');
@@ -151,7 +161,7 @@ Route::group(['namespace' => 'Backend','prefix'=>'subscription'], function () {
 // *****Subscription Ends*******
 
 // *****Subscription Start*******
-Route::group(['namespace' => 'Backend','prefix'=>'order'], function () {
+Route::group(['namespace' => 'Backend','prefix'=>'admin/order'], function () {
     Route::get('/','OrderController@index')->name('order.index');
     Route::get('/create','OrderController@create')->name('order.create');
     Route::post('/store','OrderController@store')->name('order.store');

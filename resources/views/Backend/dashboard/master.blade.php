@@ -174,8 +174,9 @@
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{ route('catagory.index') }}">Catagory</a></li>
                                     <li><a href="{{ route('subcatagory.index') }}">Subcatagory</a></li>
-                                    <li><a href="{{ route('product.index') }}">Product</a></li>
                                     <li><a href="{{ route('brand.index') }}">Brand</a></li>
+                                    <li><a href="{{ route('product.index') }}">Product</a></li>
+                                    <li><a href="{{ route('color.index') }}">Color</a></li>
 
                                 </ul>
                             </li>

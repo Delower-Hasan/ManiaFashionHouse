@@ -21,7 +21,7 @@
 @php
 use Carbon\Carbon;
 
- $orders = App\Model\Backend\Order::where('billing_id',$billing_id)->get();
+ $orders = App\Model\Backend\Order::where('billing_id',1)->get();
 
  @endphp
 <body>

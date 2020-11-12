@@ -125,26 +125,17 @@
                                   {{  $product->long_description}}
                                 </textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="quantity">quantity  <span class="text-danger">*</span></label>
-                                <input type="text" value="{{$product->quantity  }}" name="quantity" parsley-trigger="change" required
-                                       placeholder="Product quantity" class="form-control" id="quantity">
+                            <div class="checkbox checkbox-success checkbox-circle">
+                                <input id="checkbox-10" name="is_features" {{ $product->is_features == 'on'? 'checked':'' }} type="checkbox" >
+                                <label for="checkbox-10">
+                                    Make it Features product
+                                </label>
                             </div>
 
                             <div class="form-group">
                                 <label for="price">Price  <span class="text-danger">*</span></label>
                                 <input type="text" value="{{$product->price  }}" name="price" parsley-trigger="change" required
                                        placeholder="Product price" class="form-control" id="price">
-                            </div>
-
-                            <div class="form-group">
-                              <label for="Color"> Color </label>
-                              <input type="text" name="color" value="{{$product->color  }}"  id="Color" placeholder="Product Color" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                              <label for="Size"> Size </label>
-                              <input type="text" value="{{$product->size  }}" name="size" id="Size" placeholder="Size" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -175,9 +166,15 @@
 
                     <div class="row m-t-20">
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            {{--  <div class="form-group">
                                 <label for="metaTitle">Meta Title</label>
                                 <input type="text" value="{{$product->meta_title  }}"  id="metaTitle" class="form-control" name='meta_title' placeholder='Meta Title'>
+                            </div>  --}}
+                            <div class="m-t-20">
+                                <p class="text-muted m-b-15 font-14">
+                                    Meta Title
+                                </p>
+                                <input type="text" name="meta_title" class="form-control" maxlength="60" value="{{$product->meta_title  }}" placeholder="Meta Title has a limit of 60 chars." id="alloptions" />
                             </div>
 
                             <div class="form-group">
@@ -185,10 +182,18 @@
                                 <input type="text" value="{{$product->slug  }}"  id="slug" class="form-control" name='slug' placeholder='Meta slug'>
                             </div>
 
-                           <div class="form-group">
+                           {{--  <div class="form-group">
                                 <label for="meta_desc">Meta Description</label>
                                 <textarea id="meta_desc" class="form-control"  name='meta_description' placeholder='Meta Description' cols="30" rows="10">
                                  {{$product->meta_description  }}
+                                </textarea>
+                            </div>  --}}
+                            <div class="m-t-20">
+                                <p class="text-muted m-b-15 font-14">
+                                    Meta Description
+                                </p>
+                                <textarea id="textarea"  name="meta_description" class="form-control" maxlength="160" rows="3" placeholder="Meta description has a limit of 160 chars.">
+                                    {{$product->meta_description  }}
                                 </textarea>
                             </div>
                             </div>
@@ -248,7 +253,7 @@
 <script src="{{ url('/backend') }}/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
 <!--wizard initialization-->
 <script src="{{ url('/backend') }}/assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
-
+<script src="{{ url('/backend') }}/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 @endsection
 
 @section('main_js')

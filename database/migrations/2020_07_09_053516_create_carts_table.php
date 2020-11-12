@@ -19,6 +19,8 @@ class CreateCartsTable extends Migration
             $table->string('mac_address');
             $table->string('quantity');
             $table->string('totall');
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->timestamps();
         });
     }

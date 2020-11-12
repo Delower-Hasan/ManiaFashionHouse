@@ -21,14 +21,12 @@ class CreateProductsTable extends Migration
             $table->string('sku_id');
             $table->string('product_img');
             $table->string('product_name');
-            $table->string('quantity');
             $table->text('price');
             $table->text('short_description');
             $table->string('product_type');
             $table->text('long_description');
-            $table->string('color');
-            $table->string('size');
             $table->string('material');
+            $table->string('is_features')->default('false');
             $table->string('status')->default(0);
             $table->string('meta_title');
             $table->string('slug');

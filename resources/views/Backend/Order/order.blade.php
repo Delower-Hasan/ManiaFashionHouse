@@ -15,11 +15,11 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Manage Orders </h4>
+            <h4 class="page-title float-left">Manage sales </h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('order.index') }}">Orders</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('sale.index') }}">sales</a></li>
 
             </ol>
 
@@ -49,17 +49,16 @@
             </div>
             @endif
 
-            <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="datatable-buttons" class="table table-striped table-bsaleed" cellspacing="0" width="100%">
 
                 <thead>
 
                 <tr>
-                    <th>Order Id</th>
+                    <th>sale Id</th>
                     <th>Product</th>
                     <th>Payment Method</th>
                     <th>Payment Status</th>
-                    <th>Shipping Status</th>
-                    <th>Order Status</th>
+                    
                     <th>Date</th>
                     <th>Total</th>
 
@@ -70,44 +69,56 @@
 
                 <tbody>
 
-                @foreach ($orders as $keys=> $order)
+                @foreach ($sales as  $sale)
+                @foreach ($billings as $billing)
+                    @if ($sale->id == $billing->sale_id)
+                     <td>{{$sale->id}}</td>
+                     <td>
+                        {{ $billing->Product->product_name }}
+                    </td>
+                    <td>{{ $billing->payment_method }}</td>
+                    <td>Paid</td>
+
+                    @endif
+
+                @endforeach
                 <tr>
 
-                    <td>{{$order->id}}</td>
+                    <td>{{$sale->id}}</td>
                     <td>
-                        {{ $order->product->product_name }}
+                        {{ $sale->product->product_name }}
                     </td>
 
                      <td>
-                        @if ($order->billing->transaction_id == 'cash')
+                        @if ($sale->billing->transaction_id == 'cash')
                             Cash
-                        @elseif($order->billing->cash_on_deliver=='on')
+                        @elseif($sale->billing->cash_on_deliver=='on')
                             Cash On Delivery
                             @else
                             Invalid payment
                         @endif
                     </td>
 
-                    @if ($order->shipping_process ==1)
+                    @if ($sale->shipping_process ==1)
                     <td>
-                        {{ $order->is_paid==1?'Paid':'Due' }}
+                        {{ $sale->is_paid==1?'Paid':'Due' }}
                     </td>
 
                     @else
                     <td>Processing</td>
                    @endif
 
-                    <td>{{ $order->shipping_process==0?'Processing':'Shipped' }}</td>
+                    <td>{{ $sale->shipping_process==0?'Processing':'Shipped' }}</td>
 
-                    @if ($order->shipping_process==0)
+                    @if ($sale->shipping_process==0)
                         <td> Processing</td>
                         @else
                         <td>Cancel</td>
 
                     @endif
-                    {{-- <td>{{ $order->is_cancel==0?'Delivered':'Cancel' }}</td> --}}
-                    <td>{{ $order->created_at->format('M d, Y') }}</td>
-                    <td>{{ $order->billing->grandTotal }}</td>
+                    {{-- <td>{{ $sale->is_cancel==0?'Delivered':'Cancel' }}</td> --}}
+                    <td>{{ $sale->created_at->format('M d, Y') }}</td>
+                    <td>{{ $sale->billing->grandTotal }}</td>
 
                     </tr>
 

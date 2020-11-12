@@ -6,6 +6,13 @@
 <link href="{{ url('/backend') }}/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 <!-- Responsive datatable examples -->
 <link href="{{ url('/backend') }}/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+{{--  color picker js  --}}
+<link href="{{ url('/backend') }}/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+<link href="{{ url('/backend') }}/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<link href="{{ url('/backend') }}/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="{{ url('/backend') }}/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+<link href="{{ url('/backend') }}/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -54,20 +61,27 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>product_id</th>
-                    <th>subcatagory_id</th>
-                    <th>Brand Name</th>
-                    <th>product_img</th>
-                    <th>sku_id</th>
-                    <th>product_name price</th>
-                    <th>quantity</th>
-                    <th>price</th>
-                    <th>short_description</th>
-                    <th>product_type</th>
-                    <th>long_description</th>
-                    <th>color</th>
-                    <th>size</th>
-                    <th>material</th>
+                    <th>Catagory</th>
+                    <th>Subcatagory</th>
+                    <th>Brand </th>
+                    <th>Product img</th>
+                    <th>SKU</th>
+                    <th>Product Name </th>
+                    <th>Short Description</th>
+                    <th>Long Description</th>
+                    <th>
+                      <table>
+                        <tr>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </table>
+                    </th>
+                    <th>Product Price</th>
+                    <th>Product Type</th>
+                    <th>Material</th>
+                    <th>Is Features</th>
                     <th>Meta Title</th>
                     <th>Slug</th>
                     <th>Meta Description</th>
@@ -86,20 +100,48 @@
                         <td>{{ $product->subcatagory->subcatagory }}</td>
                         <td>{{ $product->brand->brand_name }}</td>
                         <td >
-                          @foreach ($product->product_img as $img)
-                          <img src="{{ url( $img ) }}" width="50" alt="">
-                          @endforeach
+
+                          <img src="{{ url( $product->product_img[0] ) }}" width="50" alt="">
+
                         </td>
                         <td>{{ $product->sku_id }}</td>
                         <td>{{ $product->product_name }}</td>
-                        <td>{{ $product->quantity }}</td>
+                        <td>{!! substr($product->short_description,0,20) !!}</td>
+                        <td>{!! substr($product->long_description,0,20 ) !!}</td>
+                        <td>
+                            <table>
+
+                             @foreach ($colors as $clr)
+                                 @if($clr->product_id == $product->id)
+
+                                     <tr>
+                                         <td>
+                                             <div class="form-group">
+                                                 <div data-color-format="rgb" data-color="rgb({{ $clr->color }})" class="colorpicker-default input-group">
+
+                                                     <span class="input-group-btn add-on">
+                                                         <button class="btn btn-white" type="button">
+                                                             <i style="background-color: rgb({{ $clr->color }});margin-top: 2px;"></i>
+                                                         </button>
+                                                     </span>
+                                                 </div>
+                                             </div>
+
+                                         </td>
+                                         <td>{{ ($clr->size) }}</td>
+                                         <td>{{ ($clr->quantity) }}</td>
+
+                                     </tr>
+                                 @endif
+                             @endforeach
+                            </table>
+                         </td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ substr($product->short_description,0,50) }}</td>
                         <td>{{ $product->product_type  }}</td>
-                        <td>{{ substr($product->long_description,0,50 ) }}</td>
-                        <td>{{ $product->color }}</td>
-                        <td>{{ $product->size }}</td>
                         <td>{{ $product->material }}</td>
+                        <td>{{ $product->material=='on'?'Features':'Regular product' }}</td>
+
+
                         <td>{{ $product->meta_title }}</td>
                         <td>{{ $product->slug }}</td>
                         <td>{{ $product->meta_description }}</td>
@@ -111,7 +153,7 @@
                            @endif
                         </td>
 
-                        <td><a class="btn btn-info" href="{{ route('product.edit',$product->id) }}">Edit</a></td>
+                        <td><a class="btn btn-success" href="{{ route('product.edit',$product->id) }}">Edit</a></td>
                         <td><a class="btn btn-danger" href="{{ route('product.delete',$product->id) }}">delete</a></td>
                     </tr>
                     @endforeach
@@ -142,6 +184,17 @@
 <!-- Responsive examples -->
 <script src="{{ url('/backend') }}/plugins/datatables/dataTables.responsive.min.js"></script>
 <script src="{{ url('/backend') }}/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+{{--  Color picker js  --}}
+<script src="{{ url('/backend') }}/plugins/moment/moment.js"></script>
+<script src="{{ url('/backend') }}/plugins/timepicker/bootstrap-timepicker.js"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Init js -->
+<script src="{{ url('/backend') }}/assets/pages/jquery.form-pickers.init.js"></script>
 @endsection
 
 

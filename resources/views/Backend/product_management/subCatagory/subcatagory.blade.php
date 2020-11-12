@@ -61,7 +61,8 @@
                         <td>{{ $subCat->subcatagory }}</td>
                         <td>
                             <!-- Button trigger modal -->
-                            <a class="btn btn-info waves-effect waves-light btn-sm"   data-toggle="modal" data-target="#exampleModal{{ $subCat->id }}" >Edit</a></td>
+                            <a class="btn btn-info waves-effect waves-light btn-sm"   data-toggle="modal" data-target="#exampleModal{{ $subCat->id }}" >Edit</a>
+                        </td>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal{{ $subCat->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

@@ -10,12 +10,17 @@
 <!-- Summernote css -->
 <link href="{{ url('/backend') }}/plugins/summernote/summernote.css" rel="stylesheet" />
 
+{{--  Select 2   --}}
+<link href="{{ url('/backend') }}/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="{{ url('/backend') }}/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+<link href="{{ url('/backend') }}/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title float-left">Catagory</h4>
+            <h4 class="page-title float-left">Product</h4>
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">Dashboard</a></li>
@@ -108,28 +113,13 @@
                                 <textarea name="long_description" id="Description" placeholder="Product Description" cols="30" rows="10" class="form-control summernote"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="quantity">quantity NO <span class="text-danger">*</span></label>
-                                <input type="text" name="quantity" parsley-trigger="change" required
-                                       placeholder="Product quantity" class="form-control" id="quantity">
-                            </div>
 
                             <div class="form-group">
                                 <label for="price">Price  <span class="text-danger">*</span></label>
                                 <input type="text" name="price" parsley-trigger="change" required
                                        placeholder="Product price" class="form-control" id="price">
                             </div>
-                            <div class="form-group">
-                              <label for="Color"> Color </label>
-                              <input type="text"  name="color" id="Color" placeholder="Product Color" class="form-control">
-                            </div>
 
-
-
-                            <div class="form-group">
-                              <label for="Size"> Size </label>
-                              <input type="text" name="size" id="Size" placeholder="Size" class="form-control">
-                            </div>
 
                             <div class="form-group">
                               <label for="Material"> Material </label>
@@ -140,6 +130,12 @@
                                 <label for="product type">product type  <span class="text-danger">*</span></label>
                                 <input type="text" name="product_type" parsley-trigger="change" required
                                        placeholder="Product_type" class="form-control" id="product type">
+                            </div>
+                            <div class="checkbox checkbox-success checkbox-circle">
+                                <input id="checkbox-10" name="is_features" type="checkbox" >
+                                <label for="checkbox-10">
+                                    Make it Features product
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -156,19 +152,25 @@
                 </fieldset>
                 <fieldset title="2">
                     <legend>SEO</legend>
-                    <div class="form-group">
-                        <label for="MetaTitle">Meta Title  <span class="text-danger">*</span></label>
-                        <input type="text" name="meta_title" parsley-trigger="change" required
-                               placeholder="Meta Title" class="form-control" id="MetaTitle">
+
+                    <div class="m-t-20">
+
+                        <p class="text-muted m-b-15 font-14">
+                            Meta Title
+                        </p>
+                        <input type="text" name="meta_title" class="form-control" maxlength="60"placeholder="Meta Title has a limit of 60 chars." id="alloptions" />
                     </div>
                     <div class="form-group">
                         <label for="slug">Slug  <span class="text-danger">*</span></label>
                         <input type="text" name="slug" parsley-trigger="change" required
                                placeholder="Meta slug" class="form-control" id="slug">
                     </div>
-                    <div class="form-group">
-                        <label for="Meta_Description">Meta Description  <span class="text-danger">*</span></label>
-                        <textarea name="meta_description" class="form-control" id="Meta_Description" cols="30" rows="10"></textarea>
+
+                    <div class="m-t-20">
+                        <p class="text-muted m-b-15 font-14">
+                            Meta Description
+                        </p>
+                        <textarea id="textarea"  name="meta_description" class="form-control" maxlength="160" rows="3" placeholder="Meta description has a limit of 160 chars."></textarea>
                     </div>
                 </fieldset>
                 <button class="btn btn-primary waves-effect waves-light stepy-finish" type="submit">
@@ -206,6 +208,13 @@
 <script src="{{ url('/backend') }}/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
 <!--wizard initialization-->
 <script src="{{ url('/backend') }}/assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+<script src="{{ url('/backend') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+<script src="{{ url('/backend') }}/plugins/bootstrap-select/js/bootstrap-select.js" type="text/javascript"></script>
+
+<script src="{{ url('/backend') }}/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
+<!-- Init Js file -->
+
 
 @endsection
 
