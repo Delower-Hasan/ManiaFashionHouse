@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->text('long_description');
             $table->string('material');
             $table->string('is_features')->default('false');
+            $table->string('best_selling')->default('false');
             $table->string('status')->default(0);
             $table->string('meta_title');
             $table->string('slug');

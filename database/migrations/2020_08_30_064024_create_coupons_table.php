@@ -17,8 +17,8 @@ class CreateCouponsTable extends Migration
             $table->id();
             $table->string('coupon_title');
             $table->string('coupon_code');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->string('discount');
             $table->string('status');
             $table->timestamps();

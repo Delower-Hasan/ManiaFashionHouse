@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
-    // stike manu 
-    // $(window).on('scroll',function() {    
+    // stike manu
+    // $(window).on('scroll',function() {
     //     var scroll = $(window).scrollTop();
     //     if (scroll < 100) {
     //      $(".header-scroll").removeClass("scroll-header");
@@ -14,12 +14,12 @@
     // payment method
     let bkash_radio = document.getElementById('Bkash');
     let bkash_id = document.querySelector('.bkash_id')
-    
+
     let payment_method = document.querySelectorAll('.pm_method')
-    
+
     payment_method.forEach(function(pm){
         pm.addEventListener('change',function(e){
-            
+
             if(pm.value=='Bkash'){
                 bkash_id.classList.add('bkash_id_block');
             }else{
@@ -27,10 +27,10 @@
             }
         })
     })
-    
-    
-    
-    
+
+
+
+
     // payment method
 
 
@@ -60,7 +60,7 @@
         $('.searh-bar-top').removeClass('searh-menu-main-top');
     });
 
-    // shoting-jq 
+    // shoting-jq
 
     $(document).ready(function () {
         $("#toggle-btn").click(function () {
@@ -123,9 +123,13 @@
         });
     });
 
-    // listing-js-activation 
+    // listing-js-activation
     $(document).ready(function () {
         $('.select').niceSelect();
+    });
+    // listing-js-activation
+    $(document).ready(function () {
+        $('.quick-select').niceSelect();
     });
 
     // filter j active
@@ -148,6 +152,7 @@
         const input = $(e.target).closest('.input-group').find('input');
         if (input.is('input')) {
             input[0][isNegative ? 'stepDown' : 'stepUp']()
+            input[0].value
         }
     });
     // meanmenu
@@ -174,7 +179,7 @@
             enabled: true
         }
     });
-    // mobile -menu 
+    // mobile -menu
     $(document).ready(function () {
         ma5menu({
             menu: '.site-menu',
@@ -239,7 +244,7 @@
     });
 
 
-    // product-image-changing 
+    // product-image-changing
     // $('.smail_thamb-img ul#thumbs li > a').on('click', function () {
     //     $('#thumbs li a').removeClass("active");
     //     $(this).addClass("active");
@@ -256,7 +261,7 @@
 
 thumb.forEach(function(th,index){
     th.addEventListener('click',function(event){
-        event.preventDefault(); 
+        event.preventDefault();
         let href = this.getAttribute('href');
         let im = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.firstElementChild.firstElementChild
         im.setAttribute('src',href);
@@ -264,7 +269,7 @@ thumb.forEach(function(th,index){
     })
 })
 
-    // 
+    //
     $('.bar').on("click", function () {
         $('.btn-menu-main').addClass('btn-menu-main-right');
     });
@@ -288,14 +293,14 @@ thumb.forEach(function(th,index){
         prevArrow: '<button class="slide-arrow prev-arrow"></button>',
         nextArrow: '<button class="slide-arrow next-arrow"></button>'
     });
-    $(".owl-carousel").slick({
-        speed: 1000,
-        dots: false,
-        autoplay: true,
-        autoplaySpeed: 500,
-        prevArrow: '<button class="slide-arrow prev-arrow"></button>',
-        nextArrow: '<button class="slide-arrow next-arrow"></button>'
-    });
+    // $(".owl-carousel").slick({
+    //     speed: 1000,
+    //     dots: false,
+    //     autoplay: true,
+    //     autoplaySpeed: 500,
+    //     prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+    //     nextArrow: '<button class="slide-arrow next-arrow"></button>'
+    // });
 
     $(window).on('scroll', function () {
         var scroll = $(window).scrollTop();
@@ -311,7 +316,7 @@ thumb.forEach(function(th,index){
         var BasicSlider = $('.slider-active');
 
         BasicSlider.on('init', function (e, slick) {
-            // ei-jayay-singel-slide-name ta chane korte hobe 
+            // ei-jayay-singel-slide-name ta chane korte hobe
             var $firstAnimatingElements = $('.singel-slider:first-child').find('[data-animation]');
             doAnimations($firstAnimatingElements);
         });
@@ -353,5 +358,28 @@ thumb.forEach(function(th,index){
         }
     }
     mainSlider();
+
+    // Quick view carousel
+    $('.quick-view-left').owlCarousel({
+        loop:true,
+        margin:10,
+        navText:['<i class="fas fa-arrow-left"></i>','<i class="fas fa-arrow-right"></i>'],
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:1,
+                nav:false
+            },
+            1000:{
+                items:1,
+                nav:true,
+                loop:false
+            }
+        }
+    })
 
 })(jQuery);

@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Model\Backend\Product;
 
-Route::get('/', function () {
-    $products = Product::all();
-    return view('welcome',compact('products'));
-});
+// Route::get('/', function () {
+//     $products = Product::all();
+//     return view('welcome',compact('products'));
+// });
 
 Auth::routes();
 
@@ -72,8 +72,32 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/deactive/{id}','ProductController@deactive')->name('product.deactive');
     Route::post('/update/{id}','ProductController@update')->name('product.update');
     Route::get('/delete/{id}','ProductController@destroy')->name('product.delete');
+    Route::get('/features','ProductController@featured')->name('product.features');
+    Route::get('/features/{id}','ProductController@feature_delete')->name('feature.delete');
+    Route::get('/best-selling','ProductController@bestSelling')->name('product.bestSelling');
+    Route::get('/bestselling-delete/{id}','ProductController@bestSelling_delete')->name('best_selling.delete');
     });
-// *****products Ends*******
+// ****products Ends*******
+
+// *****coupon Collection Start*******
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/coupon'], function () {
+    Route::get('/','CouponController@index')->name('coupon_ctlr.index');
+    Route::get('/create','CouponController@create')->name('coupon_ctlr.create');
+    Route::post('/store','CouponController@store')->name('coupon_ctlr.store');
+    Route::get('/delete/{id}','CouponController@destroy')->name('coupon_ctlr.delete');
+    Route::post('/update/{id}','CouponController@update')->name('coupon_ctlr.update');
+    });
+// ****coupon Collection Ends*******
+
+// *****Discounted Controller Start*******
+    Route::group(['namespace' => 'Backend','prefix'=>'admin/dis_collection'], function () {
+    Route::get('/','DiscountCollectionController@index')->name('dis_collect.index');
+    Route::get('/create','DiscountCollectionController@create')->name('dis_collect.create');
+    Route::post('/store','DiscountCollectionController@store')->name('dis_collect.store');
+    Route::get('/delete/{id}','DiscountCollectionController@destroy')->name('dis_collect.delete');
+    });
+// ****Discounted Controller Ends*******
+
 
 // *****Color & Size Start*******
     Route::group(['namespace' => 'Backend','prefix'=>'admin/color'], function () {
@@ -174,15 +198,25 @@ Route::group(['namespace' => 'Backend','prefix'=>'admin/order'], function () {
 
 // ************************FRONTEND******************
 
+
+// *****Home Start*******
+    Route::group(['namespace' => 'Frontend','prefix'=>'/'], function () {
+    Route::get('/','IndexController@index');
+    Route::get('/product/{slug}','IndexController@product_details')->name('product_details');
+    Route::post('/product-review','IndexController@ProductReviews')->name('product_reviews');
+    });
+// *****Home Ends*******
+
 // *****Cart Start*******
     Route::group(['namespace' => 'Frontend','prefix'=>'cart'], function () {
     Route::get('/','CartController@index')->name('cart.index');
     // Route::get('/create','CartController@create')->name('cart.create');
-    Route::get('/store/{id}','CartController@store')->name('cart.store');
+    Route::get('/q-store/{id}','CartController@Qstore')->name('cart.qstore');
+    Route::post('/store/{id}','CartController@store')->name('cart.store');
     // Route::get('/edit/{id}','CartController@edit')->name('cart.edit');
     Route::post('/update','CartController@update')->name('cart.update');
     Route::get('/delete/{id}','CartController@destroy')->name('cart.delete');
-
+    Route::get('/clear','CartController@Clear')->name('cart.clear');
     });
 // *****Cart Ends*******
 
@@ -215,6 +249,23 @@ Route::group(['namespace' => 'Frontend','prefix'=>'wishlist'], function () {
     Route::get('/delete/{id}','WishListController@destroy')->name('wishlist.delete');
     });
 // *****Wishlist Ends*******
+
+// *****Shop Start*******
+Route::group(['namespace' => 'Frontend','prefix'=>'shop'], function () {
+    Route::get('/','ShopController@index')->name('shop.index');
+    Route::get('/products','ShopController@Store_products')->name('shop.products');
+    Route::get('/collection/{id}','ShopController@Shop_collection')->name('shop.collection');
+    Route::get('/subcollection/{id}','ShopController@Shop_subcollection')->name('shop.subcollection');
+    Route::get('/color/{id}','ShopController@Shop_color')->name('color.product');
+    Route::get('/brand/{id}','ShopController@Shop_Brand')->name('shop.brand');
+    });
+// *****Shop Ends*******
+
+// *****Blog page Start*******
+Route::group(['namespace' => 'Frontend','prefix'=>'blog'], function () {
+    Route::get('/','BlogController@index')->name('blogf.index');
+    });
+// *****Blog page Ends*******
 
 
 

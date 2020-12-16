@@ -127,6 +127,10 @@
     $(document).ready(function () {
         $('.select').niceSelect();
     });
+    // listing-js-activation 
+    $(document).ready(function () {
+        $('.quick-select').niceSelect();
+    });
 
     // filter j active
     $('.add-filter').on("click", function () {
@@ -288,14 +292,14 @@ thumb.forEach(function(th,index){
         prevArrow: '<button class="slide-arrow prev-arrow"></button>',
         nextArrow: '<button class="slide-arrow next-arrow"></button>'
     });
-    $(".owl-carousel").slick({
-        speed: 1000,
-        dots: false,
-        autoplay: true,
-        autoplaySpeed: 500,
-        prevArrow: '<button class="slide-arrow prev-arrow"></button>',
-        nextArrow: '<button class="slide-arrow next-arrow"></button>'
-    });
+    // $(".owl-carousel").slick({
+    //     speed: 1000,
+    //     dots: false,
+    //     autoplay: true,
+    //     autoplaySpeed: 500,
+    //     prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+    //     nextArrow: '<button class="slide-arrow next-arrow"></button>'
+    // });
 
     $(window).on('scroll', function () {
         var scroll = $(window).scrollTop();
@@ -353,5 +357,28 @@ thumb.forEach(function(th,index){
         }
     }
     mainSlider();
+
+    // Quick view carousel
+    $('.quick-view-left').owlCarousel({
+        loop:true,
+        margin:10,
+        navText:['<i class="fas fa-arrow-left"></i>','<i class="fas fa-arrow-right"></i>'],
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:1,
+                nav:false
+            },
+            1000:{
+                items:1,
+                nav:true,
+                loop:false
+            }
+        }
+    })
 
 })(jQuery);

@@ -70,7 +70,7 @@ class BrandController extends Controller
             unlink($delete);
          }
         Brand::findOrFail($id)->delete();
-        // Product::where('brand_id',$id)->delete();
+        Product::where('brand_id',$id)->delete();
         return back()->with('delete','Brand Item Deleted');
     }
 

@@ -17,6 +17,7 @@ class Product extends Model
         'sku_id',
         'product_name',
         'is_features',
+        'best_selling',
         'price',
         'short_description',
         'product_type',
@@ -39,5 +40,9 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class,'brand_id');
+    }
+    public function varient()
+    {
+        return $this->hasMany(ColorSize::class);
     }
 }

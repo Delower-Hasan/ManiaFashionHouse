@@ -176,7 +176,9 @@
                                     <li><a href="{{ route('subcatagory.index') }}">Subcatagory</a></li>
                                     <li><a href="{{ route('brand.index') }}">Brand</a></li>
                                     <li><a href="{{ route('product.index') }}">Product</a></li>
-                                    <li><a href="{{ route('color.index') }}">Color</a></li>
+                                    <li><a href="{{ route('color.index') }}">Varient</a></li>
+                                    <li><a href="{{ route('product.features') }}">Featured Product</a></li>
+                                    <li><a href="{{ route('product.bestSelling') }}">Best Selling Product</a></li>
 
                                 </ul>
                             </li>
@@ -209,6 +211,15 @@
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{ route('order.index') }}">Orders</a></li>
                                     <li><a href="icons-materialdesign.html"> Transaction</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Discount </span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('dis_collect.index') }}">Discount Collection</a></li>
+                                    <li><a href="{{ route('coupon_ctlr.index') }}">Coupon</a></li>
+
 
                                 </ul>
                             </li>

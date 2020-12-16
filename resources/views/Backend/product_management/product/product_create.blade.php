@@ -137,6 +137,12 @@
                                     Make it Features product
                                 </label>
                             </div>
+                            <div class="checkbox checkbox-success checkbox-circle">
+                                <input id="bestselling-10" name="best_selling" type="checkbox" >
+                                <label for="bestselling-10">
+                                    Make it Best Selling product
+                                </label>
+                            </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
                                     <select name="status" class="form-control" id="status">

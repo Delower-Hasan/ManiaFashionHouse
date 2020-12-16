@@ -82,6 +82,7 @@
                     <th>Product Type</th>
                     <th>Material</th>
                     <th>Is Features</th>
+                    <th>Best Selling</th>
                     <th>Meta Title</th>
                     <th>Slug</th>
                     <th>Meta Description</th>
@@ -113,23 +114,22 @@
 
                              @foreach ($colors as $clr)
                                  @if($clr->product_id == $product->id)
-
                                      <tr>
                                          <td>
                                              <div class="form-group">
-                                                 <div data-color-format="rgb" data-color="rgb({{ $clr->color }})" class="colorpicker-default input-group">
+                                                 <div data-color-format="rgb" data-color="rgb({{ $clr->color ? $clr->color : '-' }})" class="colorpicker-default input-group">
 
                                                      <span class="input-group-btn add-on">
                                                          <button class="btn btn-white" type="button">
-                                                             <i style="background-color: rgb({{ $clr->color }});margin-top: 2px;"></i>
+                                                             <i style="background-color: rgb({{ $clr->color ? $clr->color : '-' }});margin-top: 2px;"></i>
                                                          </button>
                                                      </span>
                                                  </div>
                                              </div>
 
                                          </td>
-                                         <td>{{ ($clr->size) }}</td>
-                                         <td>{{ ($clr->quantity) }}</td>
+                                         <td>{{ ($clr->size ? $clr->size : '-') }}</td>
+                                         <td>{{ ($clr->quantity ? $clr->quantity : '-') }}</td>
 
                                      </tr>
                                  @endif

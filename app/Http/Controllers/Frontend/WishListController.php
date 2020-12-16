@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Backend\WishList;
 use App\Model\Backend\Cart;
+use App\Model\Backend\ColorSize;
 use App\Model\Backend\Product;
 
 
@@ -13,7 +14,8 @@ class WishListController extends Controller
 {
    function index(){
        $wishlists = WishList::all();
-       return view('frontend/wishlist',compact('wishlists'));
+       $varients = ColorSize::all();
+       return view('frontend/wishlist',compact('wishlists','varients'));
    }
 
 

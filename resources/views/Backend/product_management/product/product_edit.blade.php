@@ -131,6 +131,12 @@
                                     Make it Features product
                                 </label>
                             </div>
+                            <div class="checkbox checkbox-success checkbox-circle">
+                                <input id="bestselling-10" name="best_selling" {{ $product->best_selling == 'on'? 'checked':'' }} type="checkbox" >
+                                <label for="bestselling-10">
+                                    Make it Best Selling product
+                                </label>
+                            </div>
 
                             <div class="form-group">
                                 <label for="price">Price  <span class="text-danger">*</span></label>

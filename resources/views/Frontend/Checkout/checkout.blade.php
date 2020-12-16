@@ -1,128 +1,159 @@
+@extends('Frontend.partials.master')
+@section('content')
+<main class="pt-60">
 
-<!doctype html>
-<html lang="en">
-  <head>
+    <div class="checkout-area pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="checkout-wrapper">
+                       <form action="#">
+                         <div class="row">
+                           <div class="col-md-6">
+                               <div class="checkout-form">
+                                   <h2>Billing Details</h2>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                                      <div class="form-group">
+                                          <label for="name">Your Full Name *</label>
+                                          <input type="text" id="name" class="form-control" placeholder="Your Name">
+                                        </div>
+                                      <div class="form-group">
+                                          <label for="Company">Company name (Optional)*</label>
+                                          <input type="text" id="Company" class="form-control" placeholder="Company name ">
+                                        </div>
 
-    <!-- C3 charts css -->
-    <link href="{{ url('/backend') }}/plugins/c3/c3.min.css" rel="stylesheet" type="text/css"  />
+                                      <div class="form-group">
+                                          <label for="division">Division *</label>
+                                          <select name="dsf" class="form-control "   id="division">
+                                              <option>Select Division</option>
+                                              @foreach ($division as $div)
+                                              <option value="{{ $div->id }}">{{ $div->name }}-{{ $div->bn_name }}</option>
+                                              @endforeach
 
-    <!-- App css -->
-    <link href="{{url('/backend')}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    @yield('extra_css')
-    <link href="{{url('/backend')}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/backend')}}/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/backend')}}/assets/css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+                                          </select>
 
-    <title>Checkout Page</title>
-  </head>
-  <body>
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-            <h1>Checkout Page</h1>
-            <div class="coupon " style="margin-top: 30px">
-                <form action="{{ route('checkout.store') }}" method="post">
-                    @csrf
-                    <div style="margin-bottom: 10px">
-                        <label for="user_name">User Name</label>
-                        <input type="text" id="user_name" name ='user_name' placeholder="User Name">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="company_name">Company Name</label>
-                        <input type="text" id="company_name" name ='company_name' placeholder="Company Name">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="division">Division</label>
-                        <select name="division" id="division">
-                            <option >Select Division</option>
-                            @foreach ($division as $div)
-                            <option value="{{ $div->id }}">{{ $div->name }}({{ $div->bn_name }}) </option>
-                            @endforeach
 
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="district">District</label>
-                        <select name="district" id="district">
-                            <option >Select District</option>
-                            @foreach ($district as $dist)
-                            <option value="{{ $dist->id }}">{{ $dist->name }}({{ $dist->bn_name }}) </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="upozela">UpoZela</label>
-                        <select name="upozela" id="upozela">
-                            <option >Select Upazila</option>
-                            @foreach ($upazila as $upa)
-                            <option value="{{ $upa->id }}">{{ $upa->name }}({{ $upa->bn_name }}) </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="union">Union</label>
-                        <select name="union" id="union">
-                            <option >Select Upazila</option>
-                            @foreach ($union as $uni)
-                            <option value="{{ $uni->id }}">{{ $uni->name }}({{ $uni->bn_name }}) </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="street_address">Address</label>
-                        <input type="text" id="street_address" name ='street_address' placeholder="Street Address">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="apartment">Apartment</label>
-                        <input type="text" name ='apartment' placeholder="Apartment Or Unit number">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="post_code">Post Code / Zip </label>
-                        <input type="text" name ='post_code' placeholder="Post Code / zip">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="phone">User Name</label>
-                        <input type="text" name ='phone' placeholder="Phone">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="email">User Name</label>
-                        <input type="email" name ='email' placeholder="Email">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <label for="transaction_id">Cash</label>
-                        <input type="text" name ='transaction_id' placeholder="Transaction Id">
-                    </div>
-                    <div style="margin-bottom: 10px">
-                        <input type="checkbox" name="cash_on_deliver" class="form-check-input" id="cash_on_deliver">
-                     <label class="form-check-label" for="cash_on_deliver">Cash On Delivery</label>
-                        {{--  <label for="cash_on_deliver">Cash on Delivery</label>
+                                        </div>
+                                      <div class="form-group">
+                                          <label for="district">District *</label>
+                                          <select name="sdfs" class="form-control " style="width: 100%" id="district">
+                                              <option>Select District</option>
+                                              @foreach ($district as $dis)
+                                              <option value="{{ $dis->id }}">{{ $dis->name }}-{{ $dis->bn_name }}</option>
+                                              @endforeach
+                                          </select>
 
-                        <input type="text" name ='cash_on_deliver' placeholder="User">  --}}
-                    </div>
+                                        </div>
+                                      <div class="form-group">
+                                          <label for="upazila">upazila *</label>
+                                          <select name="sdf" class="form-control "  id="upazila">
+                                              <option >Select upazila</option>
+                                              @foreach ($upazila as $up)
+                                              <option value="{{ $up->id }}">{{ $up->name }}-{{ $up->bn_name }}</option>
+                                              @endforeach
+                                          </select>
+                                        </div>
+                                      <div class="form-group">
+                                          <label for="Union">Union *</label>
+                                          <select name="" class="form-control "  id="Union">
+                                              <option>Select Union</option>
+                                              @foreach ($union as $un)
+                                              <option value="{{ $un->id }}">{{ $un->name }}-{{ $un->bn_name }}</option>
+                                              @endforeach
+                                          </select>
+                                        </div>
+
+                                      <div class="form-group">
+                                          <label for="address">Address **</label>
+                                          <input type="text" id="address" class="form-control" placeholder="Street Address ">
+                                        </div>
+
+                                      <div class="form-group">
+                                          <label for="apartment">apartment</label>
+                                          <input type="text" id="apartment" class="form-control" placeholder="apartment ">
+                                        </div>
+
+                                      <div class="form-group">
+                                          <label for="ZIP">Postcode / ZIP *</label>
+                                          <input type="text" id="ZIP" class="form-control" placeholder="ZIP Code ">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="phone">phone*</label>
+                                                  <input type="text" id="phone" class="form-control" placeholder="phone ">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="email">email*</label>
+                                                  <input type="email" id="email" class="form-control" placeholder="email  ">
+                                                </div>
+                                            </div>
+                                        </div>
 
 
 
-                    <button type="submit">Order Now</button>
-                </form>
 
+                               </div>
+                           </div>
+                           <div class="col-md-6">
+                               <div class="order-details pt-3">
+                                  <div class="jumbotron jumbotron-fluid">
+                                     <h2>YOUR ORDER</h2>
+                                     <ul class="order_list">
+                                         <li class="order-head">
+                                             <span>Product</span>
+                                             <span>Total</span>
+                                          </li>
+                                         <li >
+                                             <span>Cart Subtotal </span>
+                                             <span>120 BDT</span>
+                                          </li>
+                                         <li >
+                                             <span>Shipping Rate </span>
+                                             <span>120 BDT</span>
+                                          </li>
+                                         <li class="order-total" >
+                                             <span>ORDER TOTAL </span>
+                                             <span>120 BDT</span>
+                                          </li>
+                                     </ul>
+
+                                    </div>
+                                    <h3 class="payment">Select Your Payment Type</h3>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input pm_method" type="radio" name="payment_method" id="cash" value="cash">
+                                          <label class="form-check-label" for="cash">Cash</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input pm_method" type="radio" name="payment_method" id="Bkash" value="Bkash">
+                                          <label class="form-check-label" for="Bkash">Bkash</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input pm_method" type="radio" name="payment_method" id="cod" value="cod">
+                                          <label class="form-check-label" for="cod">Cash on delivary</label>
+                                        </div>
+                                       </div>
+
+                                      <div class="form-group mt-2 bkash_id">
+
+                                        <input type="text" class="form-control" >
+                                        <small id="emailHelp" class="form-text text-muted">Give Bkash payment transaction Id</small>
+                                      </div>
+                                        <button class="btn btn-primary mt-4" type="submit">Place an Order</button>
+
+                               </div>
+                           </div>
+                         </div>
+
+                       </form>
+                   </div>
+               </div>
             </div>
-          </div>
-      </div>
-  </div>
-
-
-
-<!-- jQuery  -->
-<script src="{{url('/backend')}}/assets/js/jquery.min.js"></script>
-<script src="{{url('/backend')}}/assets/js/tether.min.js"></script><!-- Tether for Bootstrap -->
-<script src="{{url('/backend')}}/assets/js/bootstrap.min.js"></script>
-<script src="{{url('/backend')}}/assets/js/metisMenu.min.js"></script>
-<script src="{{url('/backend')}}/assets/js/waves.js"></script>
-<script src="{{url('/backend')}}/assets/js/jquery.slimscroll.js"></script>
-
-  </body>
-</html>
+        </div>
+    </div>
+</main>
+@endsection

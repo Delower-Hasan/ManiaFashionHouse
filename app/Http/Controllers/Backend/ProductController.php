@@ -67,6 +67,7 @@ class ProductController extends Controller
                     'long_description'=>$request->long_description,
                     'material'=>$request->material,
                     'is_features'=>$request->is_features,
+                    'best_selling'=>$request->is_features,
                     'status'=>$request->status,
                     'meta_title'=>$request->meta_title,
                     'slug'=>$request->slug,
@@ -136,6 +137,7 @@ class ProductController extends Controller
                 'long_description'=>$request->long_description,
                 'material'=>$request->material,
                 'is_features'=>$request->is_features,
+                'best_selling'=>$request->is_features,
                 'status'=>$request->status,
                 'meta_title'=>$request->meta_title,
                 'slug'=>$request->slug,
@@ -155,6 +157,7 @@ class ProductController extends Controller
                 'long_description'=>$request->long_description,
                 'material'=>$request->material,
                 'is_features'=>$request->is_features,
+                'best_selling'=>$request->is_features,
                 'status'=>$request->status,
                 'meta_title'=>$request->meta_title,
                 'slug'=>$request->slug,
@@ -180,6 +183,31 @@ class ProductController extends Controller
     function subcatagoryAzax($id){
         $subcat = Subcatagory::where('catagory_id',$id)->get();
         return response()->json($subcat);
+    }
+    function featured(){
+        $colors = ColorSize::all();
+        $products = Product::where('is_features','on')->get();
+
+        return view('Backend.product_management.product.featured_product',compact('products','colors'));
+    }
+    function feature_delete($id){
+        Product::findOrFail($id)->update([
+            'is_features'=>false,
+        ]);
+        return back();
+    }
+    function bestSelling(){
+        $colors = ColorSize::all();
+        $products = Product::where('best_selling','on')->get();
+
+        return view('Backend.product_management.product.best_selling',compact('products','colors'));
+    }
+    function bestSelling_delete($id){
+        Product::findOrFail($id)->update([
+            'best_selling'=>false,
+        ]);
+        return back();
+
     }
 
 }

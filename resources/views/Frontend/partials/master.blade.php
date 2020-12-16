@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> @yield('meta_title','Login') </title>
+    <title> @yield('meta_title','Home page') </title>
     <meta name="description" content=@yield('meta_description','login')>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,10 +18,13 @@
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/slick.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/default.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/all.min.css">
+    <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/nice-select.css">
+    <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/owl.carousel.min.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/ma5-menu.min.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/all-universal.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/style.css">
     <link rel="stylesheet" href="{{ url('/frontend/assets') }}/css/responsive.css">
+
 </head>
 
 <body>
@@ -56,107 +59,48 @@
                                             <div class="row">
                                                 <div class="col-xl-8 col-md-12">
                                                     <div class="row">
+                                                        @php
+                                                            $catagories = App\Model\Backend\Catagory::take(4)->get();
+                                                            $subcats = App\Model\Backend\Subcatagory::all();
+                                                            $brands = App\Model\Backend\Brand::all();
+                                                            $products = App\Model\Backend\Product::where('is_features','on')->get();
+                                                            $abouts = App\Model\Backend\About::all();
+                                                        @endphp
+                                                        @foreach ($catagories as $cat)
                                                         <div class="col-sm-3">
                                                             <div class="singel-mega-manu-item">
                                                                 <h5><a class="tt-title-submenu"
-                                                                        href="index.html">TOPS</a></h5>
+                                                                        href="index.html">{{ $cat->catagory_name }}</a></h5>
                                                                 <ul class="megamenu-submenu">
-                                                                    <li><a href="index.html">Blouses & Shirts</a></li>
-                                                                    <li><a href="index.html">Dresses <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="new">New</span></div> </a>
-                                                                    </li>
-                                                                    <li><a href="index.html">Tops </a></li>
-                                                                    <li><a href="index.html">Sleeveless Tops</a></li>
-                                                                    <li><a href="index.html">Sweaters</a></li>
-                                                                    <li><a href="index.html">Jackets</a></li>
-                                                                    <li><a href="index.html">Outerwear</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu"
-                                                                        href="index.html">BOTTOMS</a></h5>
-                                                                <ul class="megamenu-submenu">
+                                                                    @foreach ($subcats as $subcat)
+                                                                    @if ($cat->id == $subcat->catagory_id)
+                                                                        <li><a href="index.html">{{ $subcat->subcatagory }}</a></li>
+                                                                    @endif
 
-                                                                    <li><a href="index.html">Trousers
-                                                                            <div class="status d-inline-block"><span
-                                                                                    class="fatured">Fatured</span>
-                                                                            </div> </a></li>
-                                                                    <li><a href="index.html">Leggings </a></li>
-                                                                    <li><a href="index.html"> Jeans</a></li>
-                                                                    <li><a href="index.html">Jumpsuit & Shorts</a></li>
-                                                                    <li><a href="index.html">Skirts</a></li>
-                                                                    <li><a href="index.html">Tights</a></li>
+                                                                    @endforeach
+
+
                                                                 </ul>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu"
-                                                                        href="index.html">ACCESSORIES</a></h5>
-                                                                <ul class="megamenu-submenu">
-                                                                    <li><a href="index.html">Hats</a></li>
-                                                                    <li><a href="index.html">Scarves & Snoods</a></li>
-                                                                    <li><a href="index.html">Belts</a></li>
-                                                                    <li><a href="index.html">Bags <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="new">New</span></div> </a>
-                                                                    </li>
-                                                                    <li><a href="index.html">Shoes <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="off">Sale 15%</span></div>
-                                                                        </a></li>
-                                                                    <li><a href="index.html">Tops </a></li>
-                                                                    <li><a href="index.html">Sunglasses</a></li>
-                                                                    <li><a href="index.html">TOP BRANDS</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        @endforeach
+
+
                                                         <div class="col-sm-3">
                                                             <div class="singel-mega-manu-item">
                                                                 <h5><a class="tt-title-submenu" href="index.html">Top
                                                                         Brands</a></h5>
-
                                                                 <div class="brans-wrapper">
+                                                                    @foreach ($brands as $brand)
                                                                     <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-01.png"
-                                                                                alt="">
-                                                                        </div>
+                                                                       <a href="#"> <div class="overly">
+                                                                        <img src="{{ $brand->brand_img }}"
+                                                                            alt="">
+                                                                    </div></a>
                                                                     </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-06.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-02.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-03.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-04.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-05.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
+                                                                    @endforeach
+
 
 
                                                                 </div>
@@ -164,7 +108,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> <!-- col-md-8 end -->
+                                                </div>
+                                                <!-- col-md-8 end -->
 
                                                 <div class="col-xl-4 col-md-6 d-none d-lg-inline-block">
                                                     <div class="singel-mega-manu-item ">
@@ -173,12 +118,17 @@
                                                     </div>
                                                     <div class="mega-slider">
                                                         <ul class="mega-menu-slider">
-                                                            <li class="slide-item"> <img
-                                                                    src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/product-01.jpg"
+                                                            @foreach ($products as $product)
+
+                                                                <li class="slide-item"> <img
+                                                                    src="{{ url($product->product_img[0] ?? '') }}"
                                                                     alt=""> </li>
-                                                            <li class="slide-item"> <img
-                                                                    src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/product-02.jpg"
-                                                                    alt=""> </li>
+
+
+
+                                                            @endforeach
+
+
                                                         </ul>
 
                                                     </div>
@@ -186,142 +136,7 @@
                                                 <!-- row div  -->
                                             </div>
                                         </div>
-                                    <li><a href="#">MAN</a>
-                                        <div class="mega-menu men">
-                                            <div class="row">
-                                                <div class="col-xl-8 col-md-12">
-                                                    <div class="row">
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu"
-                                                                        href="index.html">TOPS</a></h5>
-                                                                <ul class="megamenu-submenu">
-                                                                    <li><a href="index.html">Blouses & Shirts</a></li>
-                                                                    <li><a href="index.html">Dresses <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="new">New</span></div> </a>
-                                                                    </li>
-                                                                    <li><a href="index.html">Tops </a></li>
-                                                                    <li><a href="index.html">Sleeveless Tops</a></li>
-                                                                    <li><a href="index.html">Sweaters</a></li>
-                                                                    <li><a href="index.html">Jackets</a></li>
-                                                                    <li><a href="index.html">Outerwear</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu"
-                                                                        href="index.html">BOTTOMS</a></h5>
-                                                                <ul class="megamenu-submenu">
 
-                                                                    <li><a href="index.html">Trousers
-                                                                            <div class="status d-inline-block"><span
-                                                                                    class="fatured">Fatured</span>
-                                                                            </div> </a></li>
-                                                                    <li><a href="index.html">Leggings </a></li>
-                                                                    <li><a href="index.html"> Jeans</a></li>
-                                                                    <li><a href="index.html">Jumpsuit & Shorts</a></li>
-                                                                    <li><a href="index.html">Skirts</a></li>
-                                                                    <li><a href="index.html">Tights</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu"
-                                                                        href="index.html">ACCESSORIES</a></h5>
-                                                                <ul class="megamenu-submenu">
-                                                                    <li><a href="index.html">Hats</a></li>
-                                                                    <li><a href="index.html">Scarves & Snoods</a></li>
-                                                                    <li><a href="index.html">Belts</a></li>
-                                                                    <li><a href="index.html">Bags <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="new">New</span></div> </a>
-                                                                    </li>
-                                                                    <li><a href="index.html">Shoes <div
-                                                                                class="status d-inline-block"><span
-                                                                                    class="off">Sale 15%</span></div>
-                                                                        </a></li>
-                                                                    <li><a href="index.html">Tops </a></li>
-                                                                    <li><a href="index.html">Sunglasses</a></li>
-                                                                    <li><a href="index.html">TOP BRANDS</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="singel-mega-manu-item">
-                                                                <h5><a class="tt-title-submenu" href="index.html">Top
-                                                                        Brands</a></h5>
-
-                                                                <div class="brans-wrapper">
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-01.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-06.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-02.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-03.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-04.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="singel-image">
-                                                                        <div class="overly">
-                                                                            <img src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/brand-img-05.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- col-md-8 end -->
-
-                                                <div class="col-xl-4 col-md-6 d-none d-lg-inline-block">
-                                                    <div class="singel-mega-manu-item ">
-                                                        <h5><a class="tt-title-submenu" href="index.html">SPECIALS</a>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="mega-slider">
-                                                        <ul class="mega-menu-slider">
-                                                            <li class="slide-item"> <img
-                                                                    src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/product-01.jpg"
-                                                                    alt=""> </li>
-                                                            <li class="slide-item"> <img
-                                                                    src="{{ url('/frontend/assets') }}/./images/myuses/megamenu/product-02.jpg"
-                                                                    alt=""> </li>
-                                                        </ul>
-
-                                                    </div>
-                                                </div>
-                                                <!-- row div  -->
-                                            </div>
-                                        </div>
-                                    </li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
                             </nav>
@@ -408,7 +223,6 @@
                     <hr>
                 </div>
                 <div class="row">
-
                     <div class="col-12">
                         <div class="logo2 text-center d-lg-none">
                             <img src="{{ url('/frontend/assets') }}/./images/custom/logo(2).png" alt="image">
@@ -592,21 +406,21 @@
             </div>
 
         </div>
-  
+
     </header>
- 
-    <main class="pt-60">
+
+    {{--  <main class="pt-60">  --}}
      <!-- Bread crumb -->
-     <div>
+     {{--  <div>
         <nav aria-label="breadcrumb">
            @yield('breadcrumb')
           </nav>
-     </div>
+     </div>  --}}
     <!-- Bread crumb -->
-           
+
        @yield('content')
 
-    </main>
+    {{--  </main>  --}}
     <footer>
         <section>
             <div class="footer-contact-with-social theme-bg d-none d-sm-block">
@@ -623,7 +437,7 @@
                             </div>
                         </div>
                         <div class="col-md-3   d-flex align-items-center">
-                            <div class="social-icon footer-social d-none d-md-inline-block">
+                            <div class="social-icon footer-social d-none d-lg-inline-block">
                                 <a href=""><i class="fab fa-facebook-f"></i></a>
                                 <a href=""><i class="fab fa-behance"></i></a>
                                 <a href=""><i class="fab fa-linkedin"></i></a>
@@ -645,11 +459,11 @@
                                     <h4>CATEGORIES</h4>
                                 </div>
                                 <ul>
-                                    <li><a href="">Women</a></li>
-                                    <li><a href="">Men</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">New Arrivals</a></li>
+                                    @foreach ($catagories as $cat)
+                                    <li><a href="">{{ $cat->catagory_name }}</a></li>
+                                    @endforeach
+
+
                                 </ul>
                             </div>
                         </div>
@@ -672,9 +486,10 @@
                                 <div class="footer-tittle">
                                     <h4>ABOUT</h4>
                                 </div>
-                                <p> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore. Lorem ipsum dolor sit amet conse ctetur adipisicing
-                                    elit, seddo eiusmod tempor incididunt ut labore etdolore.</p>
+                                @foreach ($abouts as $about)
+
+                                <p>{!! substr($about->our_story,0, 100) !!}</p>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-lg-3  col-sm-6 col-12">
@@ -696,6 +511,7 @@
             </div>
         </section>
     </footer>
+
     <!-- JS here -->
     <script src="{{ url('/frontend/assets') }}/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/popper.min.js"></script>
@@ -706,11 +522,13 @@
     <script src="{{ url('/frontend/assets') }}/js/jquery.scrollUp.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/jquery.magnific-popup.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/slick.min.js"></script>
+    <script src="{{ url('/frontend/assets') }}/js/owl.carousel.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/jquery.meanmenu.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/imagesloaded.pkgd.min.js"></script>
     <script src="{{ url('/frontend/assets') }}/js/jquery.scrollUp.min.js"></script>
+    @yield('custom_js')
     <script src="{{ url('/frontend/assets') }}/js/main.js"></script>
 
-</body>
 
+</body>
 </html>
