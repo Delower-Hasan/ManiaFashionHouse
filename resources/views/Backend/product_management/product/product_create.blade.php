@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="product_name">Product Name NO <span class="text-danger">*</span></label>
+                                <label for="product_name">Product Name <span class="text-danger">*</span></label>
                                 <input type="text" name="product_name" parsley-trigger="change" required
                                        placeholder="Product Name" class="form-control" id="product_name">
                             </div>

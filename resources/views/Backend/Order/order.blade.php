@@ -19,7 +19,7 @@
 
             <ol class="breadcrumb float-right">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Visit site</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('sale.index') }}">sales</a></li>
+                {{--  <li class="breadcrumb-item"><a href="{{ route('sale.index') }}">sales</a></li>  --}}
 
             </ol>
 
@@ -48,6 +48,9 @@
                 </button>
             </div>
             @endif
+            <div class="py-4 pl-3">
+                <a class="btn btn-primary waves-effect w-md waves-light " href="{{ route('order.create') }}">Add </a>
+            </div>
 
             <table id="datatable-buttons" class="table table-striped table-bsaleed" cellspacing="0" width="100%">
 
@@ -58,7 +61,7 @@
                     <th>Product</th>
                     <th>Payment Method</th>
                     <th>Payment Status</th>
-                    
+
                     <th>Date</th>
                     <th>Total</th>
 
@@ -69,61 +72,7 @@
 
                 <tbody>
 
-                @foreach ($sales as  $sale)
-                @foreach ($billings as $billing)
-                    @if ($sale->id == $billing->sale_id)
-                     <td>{{$sale->id}}</td>
-                     <td>
-                        {{ $billing->Product->product_name }}
-                    </td>
-                    <td>{{ $billing->payment_method }}</td>
-                    <td>Paid</td>
 
-                    @endif
-
-                @endforeach
-                <tr>
-
-                    <td>{{$sale->id}}</td>
-                    <td>
-                        {{ $sale->product->product_name }}
-                    </td>
-
-                     <td>
-                        @if ($sale->billing->transaction_id == 'cash')
-                            Cash
-                        @elseif($sale->billing->cash_on_deliver=='on')
-                            Cash On Delivery
-                            @else
-                            Invalid payment
-                        @endif
-                    </td>
-
-                    @if ($sale->shipping_process ==1)
-                    <td>
-                        {{ $sale->is_paid==1?'Paid':'Due' }}
-                    </td>
-
-                    @else
-                    <td>Processing</td>
-                   @endif
-
-                    <td>{{ $sale->shipping_process==0?'Processing':'Shipped' }}</td>
-
-                    @if ($sale->shipping_process==0)
-                        <td> Processing</td>
-                        @else
-                        <td>Cancel</td>
-
-                    @endif
-                    {{-- <td>{{ $sale->is_cancel==0?'Delivered':'Cancel' }}</td> --}}
-                    <td>{{ $sale->created_at->format('M d, Y') }}</td>
-                    <td>{{ $sale->billing->grandTotal }}</td>
-
-                    </tr>
-
-
-                @endforeach
                 </tbody>
             </table>
         </div>

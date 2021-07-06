@@ -184,15 +184,17 @@ Route::group(['namespace' => 'Backend','prefix'=>'admin/subscription'], function
     });
 // *****Subscription Ends*******
 
-// *****Subscription Start*******
+// *****Order Start*******
 Route::group(['namespace' => 'Backend','prefix'=>'admin/order'], function () {
     Route::get('/','OrderController@index')->name('order.index');
     Route::get('/create','OrderController@create')->name('order.create');
+    Route::get('/azax/{id}','OrderController@OrderColorAzax');
     Route::post('/store','OrderController@store')->name('order.store');
+    Route::get('/store/azax/{data}','OrderController@storeAzax');
     Route::get('/delete/{id}','OrderController@destroy')->name('order.delete');
 
     });
-// *****Subscription Ends*******
+// *****Order Ends*******
 
 
 

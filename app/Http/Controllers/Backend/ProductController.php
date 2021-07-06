@@ -49,6 +49,7 @@ class ProductController extends Controller
         if( $request->hasFile('product_img')){
             $get_image = $request->file('product_img'); //orginal image;
             $imgArry = [];
+
             foreach($get_image as $images){
                     $image = Str::random(5).".".$images->getClientOriginalExtension();
                     Image::make($images)->save(public_path('/backend/img/products/'.$image));
