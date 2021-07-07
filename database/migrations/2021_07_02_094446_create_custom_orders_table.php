@@ -15,9 +15,10 @@ class CreateCustomOrdersTable extends Migration
     {
         Schema::create('custom_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('price');
+            $table->string('product_id');
+            $table->string('color_id');
             $table->string('quantity');
+            $table->string('price');
             // Shipping address
             $table->string('user_name');
             $table->string('company_name')->nullable();
@@ -32,11 +33,7 @@ class CreateCustomOrdersTable extends Migration
             $table->string('email')->nullable();
             $table->string('grandTotal');
             $table->string('payment_method')->nullable();
-            // Billing address
-            $table->string('billing_to')->nullable();
-            $table->text('billing_address')->nullable();
-            $table->text('billing_email')->nullable();
-            $table->text('billing_phone')->nullable();
+
 
             $table->timestamps();
         });

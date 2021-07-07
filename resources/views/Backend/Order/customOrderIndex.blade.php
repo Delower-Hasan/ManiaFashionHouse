@@ -48,9 +48,9 @@
                 </button>
             </div>
             @endif
-            {{--  <div class="py-4 pl-3">
+            <div class="py-4 pl-3">
                 <a class="btn btn-primary waves-effect w-md waves-light " href="{{ route('order.create') }}">Add </a>
-            </div>  --}}
+            </div>
 
             <table id="datatable-buttons" class="table table-striped table-bsaleed" cellspacing="0" width="100%">
 
@@ -58,23 +58,84 @@
 
                 <tr>
                     <th>sale Id</th>
-                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Company Name</th>
+                    <th>Division</th>
+                    <th>Distric</th>
+                    <th>Address</th>
+                    <th>Phone</th>
                     <th>Payment Method</th>
-                    <th>Payment Status</th>
-
-                    <th>Date</th>
                     <th>Total</th>
-
-
+                    <th>Action</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
 
                 <tbody>
+                    @foreach ($cstmOrders as $cmOrder)
+                        <tr>
+                            <td>{{ $cmOrder->id }}</td>
+                            <td>{{ $cmOrder->user_name }}</td>
+                            <td>{{ $cmOrder->company_name ?? '' }}</td>
+                            <td>{{ $cmOrder->divisionName->name }}</td>
+                            <td>{{ $cmOrder->districtName->name }}</td>
 
-                    <tr>
-                        <td></td>
-                    </tr>
+                            <td>Street: {{ $cmOrder->street_address }},Apartment: {{ $cmOrder->apartment }},Post Code: {{ $cmOrder->post_code }}</td>
+                            <td>{{ $cmOrder->phone }}</td>
+                            <td>{{ $cmOrder->payment_method }}</td>
+                            <td>{{ $cmOrder->grandTotal }}</td>
+                            <td>
+                                 {{--  Edit  --}}
+
+                            <!-- Button trigger modal -->
+                            <a class="btn btn-info waves-effect waves-light btn-sm"   data-toggle="modal" data-target="#exampleModal{{ $cmOrder->id }}" >View</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal{{ $cmOrder->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"> {{ $cmOrder->user_name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="page-title-box ">
+                                                <h4 class="page-title ">Invoice</h4>
+
+                                                <ol class="breadcrumb ">
+                                                    <li class="breadcrumb-item"><a href="#">Adminox</a></li>
+                                                    <li class="breadcrumb-item"><a href="#">Extras</a></li>
+                                                    <li class="breadcrumb-item active">Invoice</li>
+                                                </ol>
+
+                                                {{--  <div class="clearfix"></div>  --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        {{--  Edit  --}}
+                        </td>
+                            <td><a class="btn btn-danger" href="{{route('order.delete',$cmOrder->id) }}">Delete</a></td>
+                        </tr>
+                    @endforeach
+
+
+
+
 
 
                 </tbody>
