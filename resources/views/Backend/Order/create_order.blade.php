@@ -67,7 +67,7 @@
 
                             <div class="form-group">
                                 <label for="color">Color  <span class="text-danger">*</span></label>
-                                <select id="color_id"  class="form-control">
+                                <select id="color_id"  class="form-control select2">
 
                                 </select>
 
@@ -82,6 +82,7 @@
                                 <input type="number" min="1"  parsley-trigger="change" required
                                        placeholder="Product price" class="form-control" id="price">
                             </div>
+
                             <input type="text"  name="product_id" id="prod_id">
                             <input type="text"  name="color_id" id="clr_id">
                             <input type="text"  name="quantity" id="qun">
@@ -109,27 +110,86 @@
 
                 </fieldset>
                 <fieldset title="2">
-                    <legend>SEO</legend>
+                    <legend>Shipping Address</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Name  <span class="text-danger">*</span></label>
+                                <input type="text"  name="user_name"  parsley-trigger="change" required
+                                       placeholder="Client Name" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="company_name">Company Name  </label>
+                                <input type="text" name="company_name"  parsley-trigger="change"
+                                       placeholder="Company name" class="form-control" id="company_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="division">Division  </label>
+                                <select id="division" name="division" class="form-control select2">
+                                    @foreach ($division as $div)
+                                        <option value="{{ $div->id }}">{{ $div->name }}-{{ $div->bn_name }}</option>
+                                     @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District </label>
+                                <select id="district" name="district" class="form-control select2">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="upozela">Upozela  </label>
+                                <select id="upozela" name="upozela" class="form-control select2">
 
-                    <div class="m-t-20">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="union">Union </label>
+                                <select id="union" name="union" class="form-control select2">
 
-                        <p class="text-muted m-b-15 font-14">
-                            Meta Title
-                        </p>
-                        <input type="text" name="meta_title" class="form-control" maxlength="60"placeholder="Meta Title has a limit of 60 chars." id="alloptions" />
-                    </div>
-                    <div class="form-group">
-                        <label for="slug">Slug  <span class="text-danger">*</span></label>
-                        <input type="text" name="slug" parsley-trigger="change" required
-                               placeholder="Meta slug" class="form-control" id="slug">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="street_address">Street Address  </label>
+                                <input type="text" name="street_address" parsley-trigger="change"
+                                       placeholder="Street address" class="form-control" id="street_address">
+                            </div>
+                            <div class="form-group">
+                                <label for="apartment">Apartment</label>
+                                <input type="text" name="apartment" parsley-trigger="change"
+                                       placeholder="Apartment" class="form-control" id="apartment">
+                            </div>
+                            <div class="form-group">
+                                <label for="post_code">Post Code  </label>
+                                <input type="text" name="post_code" parsley-trigger="change"
+                                       placeholder="post_code" class="form-control" id="post_code">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone <span class="text-danger">*</span></label>
+                                <input type="text" name="phone" parsley-trigger="change"
+                                       placeholder="phone" class="form-control" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email </label>
+                                <input type="email" name="email" parsley-trigger="change"
+                                       placeholder="email" class="form-control" id="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="payment_method">Payment Method </label>
+                                <select id="payment_method" name="payment_method"  class="form-control select">
+                                    <option value="cash">Cash</option>
+                                    <option value="bkash">Bkash</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="m-t-20">
-                        <p class="text-muted m-b-15 font-14">
-                            Meta Description
-                        </p>
-                        <textarea id="textarea"  name="meta_description" class="form-control" maxlength="160" rows="3" placeholder="Meta description has a limit of 160 chars."></textarea>
-                    </div>
+
+
+
+
                 </fieldset>
                 <button class="btn btn-primary waves-effect waves-light stepy-finish" type="submit">
                     Submit
@@ -323,6 +383,81 @@ okButton.addEventListener('click',function(){
         }
 
     })
+
+    {{--  Zila upazila finding out  --}}
+    {{--  district finding out  --}}
+    $('#division').change(function(){
+        var division = $(this).val();
+        if(division){
+            $.ajax({
+               type:"GET",
+               url:"{{url('/admin/order/division')}}/"+division,
+               success:function(res){
+                if(res){
+                    $("#district").empty();
+                    $("#district").append('<option>Select</option>');
+                    $.each(res,function(key,value){
+                        $("#district").append(`<option value='${value.id}'> ${value.name}</option>`);
+                    });
+                }else{
+                   $("#district").empty();
+                }
+               }
+            });
+        }else{
+            $("#division").empty();
+            $("#district").empty();
+        }
+       });
+       {{-- sub district (upzela) finding out  --}}
+       $('#district').change(function(){
+        var district = $(this).val();
+        if(district){
+            $.ajax({
+               type:"GET",
+               url:"{{url('/admin/order/upzila')}}/"+district,
+               success:function(res){
+                if(res){
+                    $("#upozela").empty();
+                    $("#upozela").append('<option>Select</option>');
+                    $.each(res,function(key,value){
+                        $("#upozela").append(`<option value='${value.id}'> ${value.name}</option>`);
+                    });
+                }else{
+                   $("#upozela").empty();
+                }
+               }
+            });
+        }else{
+            $("#district").empty();
+            $("#upozela").empty();
+        }
+       });
+       {{-- Union finding out  --}}
+       $('#upozela').change(function(){
+        var upozela = $(this).val();
+        if(upozela){
+            $.ajax({
+               type:"GET",
+               url:"{{url('/admin/order/union')}}/"+upozela,
+               success:function(res){
+                if(res){
+                    $("#union").empty();
+                    $("#union").append('<option>Select</option>');
+                    $.each(res,function(key,value){
+                        $("#union").append(`<option value='${value.id}'> ${value.name}</option>`);
+                    });
+                }else{
+                   $("#union").empty();
+                }
+               }
+            });
+        }else{
+            $("#upozela").empty();
+            $("#union").empty();
+        }
+       });
+
 
 
 

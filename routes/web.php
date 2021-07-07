@@ -191,6 +191,12 @@ Route::group(['namespace' => 'Backend','prefix'=>'admin/order'], function () {
     Route::get('/azax/{id}','OrderController@OrderColorAzax');
     Route::post('/store','OrderController@store')->name('order.store');
     Route::get('/store/azax/{data}','OrderController@storeAzax');
+    Route::get('/custom/order','OrderController@customOrderIndex')->name('custom.order');
+    // division, zela, upozela
+    Route::get('/division/{div}','OrderController@divisionController');
+    Route::get('/upzila/{dis_id}','OrderController@UpozelaController');
+    Route::get('/union/{dis_id}','OrderController@UnionController');
+
     Route::get('/delete/{id}','OrderController@destroy')->name('order.delete');
 
     });
