@@ -182,6 +182,22 @@
 
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Sales </span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('order.index') }}">Orders</a></li>
+                                    <li><a href="{{ route('custom.order') }}">Your Orders</a></li>
+                                    <li><a href="icons-materialdesign.html"> Transaction</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Discount </span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('dis_collect.index') }}">Discount Collection</a></li>
+                                    <li><a href="{{ route('coupon_ctlr.index') }}">Coupon</a></li>
+                                </ul>
+                            </li>
 
                             <li>
                                 <a href="javascript: void(0);"><i class="fi-paper-stack"></i><span> Pages </span> <span class="menu-arrow"></span></a>
@@ -204,25 +220,6 @@
                                 </ul>
                             </li>
 
-
-
-                            <li>
-                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Sales </span> <span class="menu-arrow"></span></a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{ route('order.index') }}">Orders</a></li>
-                                    <li><a href="icons-materialdesign.html"> Transaction</a></li>
-
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);"><i class="fi-box"></i><span> Discount </span> <span class="menu-arrow"></span></a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{ route('dis_collect.index') }}">Discount Collection</a></li>
-                                    <li><a href="{{ route('coupon_ctlr.index') }}">Coupon</a></li>
-
-
-                                </ul>
-                            </li>
                             <li>
                                 <a href="tickets.html"><i class="fi-help"></i><span class="badge badge-danger pull-right">New</span> <span> Tickets </span></a>
                             </li>
